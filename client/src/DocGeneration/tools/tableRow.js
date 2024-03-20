@@ -12,7 +12,6 @@ import {
 } from "docx";
 import docData from "./DocData";
 import exppro from "../../DocGeneration/cExpPro";
-import expperso from "../../DocGeneration/cExpPerso";
 import enumImg from "../../_helpers/enum-Img";
 class tableRow {
     static getBlankTableRowDoubleLineBreak() {
@@ -193,7 +192,6 @@ class tableRow {
         });
         tasks.forEach(element => {
             tablecell.addChildElement(exppro.getExpTask(element))
-                //tablecell.addChildElement(docData.LineBreak())
         });
         return tablecell;
     }
@@ -202,8 +200,6 @@ class tableRow {
             children: [
                 new TableCell({
                     children: [
-                        /*exppro.getExpEnt(pros.company),
-                        docData.LineBreak(),*/
                         exppro.getExpPost(pros.title),
                         docData.LineBreak(),
                         exppro.getExpPeriode(pros.start, pros.end),
@@ -222,39 +218,6 @@ class tableRow {
                             space: 10,
                             style: BorderStyle.SINGLE, //THREE_D_EMBOSS,
                             size: 3,
-                            color: "#10b0b7",
-                        },
-                    },
-                    width: { size: 32, type: WidthType.PERCENTAGE },
-                }),
-            ],
-        });
-        tablerow.addChildElement(this.getExpTasksTableCell(pros.tasks, pros.context));
-        return tablerow;
-    }
-    static getProjectsTableRow(pros) {
-        let tablerow = new TableRow({
-            children: [
-                new TableCell({
-                    children: [
-                        exppro.getExpPost(pros.title),
-                        docData.LineBreak(),
-                        expperso.getExpPeriode(pros.period),
-                        docData.LineBreak(),
-                        exppro.getExpEnvTechTitle("Environnement technique : "),
-                        docData.LineBreak(),
-                        exppro.getExpEnvTech(pros.technical_env),
-                        docData.LineBreak(),
-                        docData.LineBreak(),
-                    ],
-                    borders: {
-                        top: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
-                        bottom: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
-                        left: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
-                        right: {
-                            space: 10,
-                            style: BorderStyle.SINGLE, //THREE_D_EMBOSS,
-                            size: 2,
                             color: "#10b0b7",
                         },
                     },

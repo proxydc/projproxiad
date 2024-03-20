@@ -13,8 +13,7 @@ import AdminLayout from "../admin/admin_Layout.vue";
 import user from "../User/user.vue";
 import FormCandidatSaisie from "../candidats/FormCanSaisie.vue";
 import DcDownload from "../candidats/ChildComponents/DcDownload.vue";
-const routes = [
-    {
+const routes = [{
         path: '/adminLayout',
         name: 'adminLayout',
         component: AdminLayout,
@@ -55,14 +54,4 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes
 });
-
-/*router.beforeEach((to, from, next) => {
-    if(to.matched[0].name =='AppDashboard')
-    {
-        authGuard()
-    }
-   // console.log(to, from)
-    next()
-})*/
-
 export default router;

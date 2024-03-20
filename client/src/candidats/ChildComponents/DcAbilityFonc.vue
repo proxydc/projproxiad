@@ -1,7 +1,6 @@
 <template>
   <div>
     <h5>{{ title }}</h5>
-   <!-- <h5>{{ maxILength }}</h5>-->
     <div id="fonct">
       <input
         v-for="(ability, index) in functionalAbilities"  :maxlength="maxILength"

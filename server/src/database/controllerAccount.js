@@ -9,12 +9,10 @@ const getAuthentification = (req, res) => {
         try {
             if (error) throw error;
             if (results.rows.length) {
-                //console.log("paw: " + results.rows[0].pass_word + results.rows.length);
                 let comp = await tools.ComparePassword(
                     pass_word,
                     results.rows[0].pass_word
                 );
-                //console.log("comp: " + comp);
                 if (comp == true) {
                     res.status(200).json({
                         role_id: results.rows[0]["role_id"],

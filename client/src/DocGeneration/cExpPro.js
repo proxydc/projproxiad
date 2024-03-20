@@ -65,9 +65,8 @@ class cExpPro {
                     heading: HeadingLevel.TITLE,
                     bold: true,
                     font: "Century Gothic",
-                    //underline: true,
                     size: 20,
-                    color: "#0c6164", //#055558", //#10b0b7", //#055029",
+                    color: "#0c6164",
                 }),
             ],
         });
@@ -139,10 +138,6 @@ class cExpPro {
                     alignment: AlignmentType.LEFT,
                     heading: HeadingLevel.TITLE,
                     font: "Century Gothic",
-                    //allCaps: true,
-
-                    //bold: true,
-                    //underline: true,
                     size: 20,
                     color: "#0c6164",
                 }),
@@ -157,11 +152,7 @@ class cExpPro {
                     alignment: AlignmentType.LEFT,
                     heading: HeadingLevel.TITLE,
                     font: "Century Gothic",
-                    //smallCaps: true,
-                    //bold: true,
-                    //underline: true,
                     size: 20,
-                    //color: "#008cba",
                 }),
             ],
             spacing: {
@@ -198,7 +189,6 @@ class cExpPro {
                                             alignment: AlignmentType.LEFT,
                                             size: 20,
                                             font: "Century Gothic",
-                                            // spacing: 10,
                                         }),
                                     ],
                                     spacing: {

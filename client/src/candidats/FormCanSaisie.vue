@@ -204,15 +204,7 @@ export default {
       this.document = JSON.stringify(this.form?.document);
     },
   },
-  /* mounted() {
-    try {
-      console.log("Iam here");
-      this.getDC(this.$route.params.id);
-      console.log("data: " + this.form);
-    } catch (err) {
-      this.errormsg = err.message;
-    }
-  },*/
+
   created() {
     try {
       this.documentId = this.$route.params.id;
@@ -242,8 +234,6 @@ export default {
     },
     save(dc) {
       try {
-        //alert("idwork: " + this.documentId);
-        //const status = 2;
         FormData.save(
           this.$route.params.id,
           dc.document,
@@ -257,8 +247,6 @@ export default {
     },
     saveAndClose(dc) {
       try {
-        //alert("idwork: " + this.documentId);
-        //const status = 3;
         FormData.save(
           this.$route.params.id,
           dc.document,
@@ -266,7 +254,6 @@ export default {
           enumDcStatus.Finalisé
         );
         const acc = localStorage.getItem("useraccount");
-        //alert("user: " + acc);
         if (acc == "admin" || acc == "user") {
           this.$router.push({ name: "user" });
         } else {

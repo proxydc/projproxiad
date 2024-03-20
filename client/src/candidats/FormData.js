@@ -14,7 +14,7 @@ class FormData {
 
     static async updateDC(id, generatedDoc, status) {
         try {
-            const url = urldc.getDcUrl(id); //`dc/${id}`;
+            const url = urldc.getDcUrl(id);
             let result = await axios.put(url, {
                 dc_status: status,
                 document: generatedDoc,
@@ -31,7 +31,6 @@ class FormData {
     static getDocumentObject(dc, document) {
 
         /* Comp fonctionnelles */
-        // alert("iam in functional");
         var domNodes = document.querySelectorAll("#fonct input");
         var nodes = [...domNodes];
         dc.functionalAbilities = nodes.map((x) => x.value).filter(function(i) { return i.trim() != ""; });
@@ -47,7 +46,6 @@ class FormData {
         var certifications = [];
         var domNodes = document.querySelectorAll("#certs div.row");
         var nodes = [...domNodes];
-        //alert("je suis la nodes length: "+ nodes.length);
         for (let i = 0; i < nodes.length; i++) {
             var year = nodes[i].childNodes[0].childNodes[0].value;
             var label = nodes[i].childNodes[1].childNodes[0].value;
@@ -56,7 +54,6 @@ class FormData {
             }
         }
         dc.certifications = certifications;
-        //console.log("certifications: " + dc.certifications[0].year);
 
         /* Langues */
         var domNodes = document.querySelectorAll("#langs input");
@@ -101,8 +98,6 @@ class FormData {
             }
         }
         dc.experiencesPro = experiencesPro;
-        //console.log("document experiences values: " + dc.experiencesPro[0] ? .start);
-        //alert("document experiences values: " + dc.experiencesPro[0] ? .end);
         /* Projects perso */
         var personalProjects = [];
         var domNodes = document.querySelectorAll("#projects .project");
@@ -138,8 +133,6 @@ class FormData {
         }
 
         dc.projectsPerso = personalProjects;
-        //console.log("document projects values: " + dc.projectsPerso[0] ? .period);
-        //alert("document projects values: " + dc.projectsPerso[0]?.title);
         return dc;
     }
 }

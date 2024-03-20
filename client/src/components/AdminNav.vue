@@ -27,7 +27,6 @@ export default {
   methods:
   {
     getUser() {
-      //alert("iam in get user");
       return localStorage.getItem('useraccount')
     },
     pageCandidats()

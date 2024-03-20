@@ -43,7 +43,6 @@
               <a class=" btn btn-outline-success btn-sm" :href="'/#/formCandidatSaisie/' + acRow.id" target="_blank" v-b-tooltip.hover title="See the candidat!">
                 Voir le dossier
               </a>
-             <!-- <button class="bi bi-copy btn btn-success mx-2" @click="CopyUrl(acRow.id)" v-b-tooltip.hover title="Copy the URL"></button> -->
               <img type="button" class="btn btn-outline-warning btn-sm" src="../assets/copyimage.png"
                 @click="CopyUrl(acRow.id)" />
               <a class=" btn btn-outline-primary btn-sm mx-2" :href="'/#/dcDownload/' + acRow.id" target="_blank" v-b-tooltip.hover title="Download the document!">

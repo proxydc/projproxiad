@@ -41,39 +41,11 @@ class cBref {
                 left: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
                 right: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
             },
-            //width: { size: 80, type: WidthType.PERCENTAGE },
         });
         if (exp != "" && exp != null && exp.length > 0) {
             tablecell.addChildElement(this.getEnt_Poste_NbExps(exp));
         }
         return tablecell;
-        /*let tablerow = new TableRow({
-            children: [
-                new TableCell({
-                    children: [new Paragraph({
-                        children: [
-                            new TextRun({
-                                text: bref.trim(),
-                                alignment: AlignmentType.LEFT,
-                                font: "Century Gothic",
-                                size: 20,
-                            }),
-                        ],
-                        spacing: {
-                            line: 350,
-                        },
-                    }), ],
-                    columnSpan: 2,
-                    borders: {
-                        top: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
-                        bottom: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
-                        left: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
-                        right: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
-                    },
-                })
-            ],
-        });
-        return tablerow;*/
     }
     static getTitle() {
         return new Paragraph({
@@ -122,7 +94,6 @@ class cBref {
                                 text: title.trim(),
                                 alignment: AlignmentType.LEFT,
                                 size: 20,
-                                //bold: true,
                                 font: "Century Gothic",
                             }), ],
                         }),
@@ -142,7 +113,6 @@ class cBref {
                                 text: nbyrs + " ans",
                                 alignment: AlignmentType.LEFT,
                                 size: 20,
-                                //bold: true,
                                 font: "Century Gothic",
                             }), ],
                         }),

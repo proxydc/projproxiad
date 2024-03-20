@@ -77,7 +77,6 @@ class cLang {
                                 left: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
                                 right: { style: BorderStyle.NONE, size: 0, color: "FFFFFF" },
                             },
-                            //width: { size: 6000, type: WidthType.DXA },
                         }),
                     ],
                 }),

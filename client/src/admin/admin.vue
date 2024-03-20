@@ -33,7 +33,7 @@
                 <td class="text-start">{{ acRow.login_name }}</td>
                 <td class="text-start">{{ acRow.display_name }}</td>
                 <td class="text-start">{{ acRow.role_name }}</td>
-                <td class="text-start"><!--:href="'/editAccount/' + acRow.id"-->
+                <td class="text-start">
                   <button class="btn btn-success mx-2" @click="editAccount(acRow.id)" v-b-tooltip.hover title="Edit the user!">Edit
                   </button>
                   <button type="button" class="btn btn-danger mx-2" @click="deleteAccount(acRow.id)" v-b-tooltip.hover title="Delete the user!">

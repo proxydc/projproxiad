@@ -1,6 +1,4 @@
 const FileSaver = require("file-saver");
-//import enumImg from "../../_helpers/enum-Img.js";
-//import { compareDesc } from 'date-fns'
 import {
     ImageRun,
     AlignmentType,
@@ -60,7 +58,6 @@ class DocData {
             docjs.technicalAbilities.length +
             docjs.certifications.length +
             docjs.languages.length;
-        // alert("nblines: " + lines);
         if (lines < 14 && lines > 8) {
             return new Paragraph({
                 text: "",
@@ -99,7 +96,6 @@ class DocData {
             children: [
                 new TextRun({
                     text: "",
-                    //break: 1,
                 }),
             ],
         });
@@ -111,7 +107,6 @@ class DocData {
                     text: " ",
                     size: 10,
                     font: "Century Gothic",
-                    //break: 1,
                 }),
             ],
         });
@@ -126,7 +121,7 @@ class DocData {
                     bold: true,
                     font: "Century Gothic",
                     size: 20,
-                    color: "#226c66", //#22636c", // "#09525c",
+                    color: "#226c66",
                 }),
             ],
         });

@@ -103,7 +103,6 @@ class DocTable {
                 let lens = docjs.experiencesPro.length - 1;
                 //compare the number of lines and should not exceed 40 lines or must be a last exp in the list
                 if (nblines > 40 || index == lens) {
-                    //alert("Iam here: " + index + "  nblines: " + nblines + "lens: " + lens);
                     //if the below condition is true, update number of lines affected in the current page
                     if (index == lens && nblines < 41) {
                         nblinesaffectedsurpage = nblines;
@@ -143,11 +142,6 @@ class DocTable {
                 }
             }
             //Verification of the creation of the pages while debugging
-            /* for (let k = 0; k < linesperpages.length; k++) {
-                 alert("Page num: " + linesperpages[k].num);
-                 alert("nblinespage: " + linesperpages[k].nblinespage);
-                 alert("Nb exps pour ce page: " + linesperpages[k].profexp.length);
-             }*/
             //Created page list is added to the document table
             linesperpages.forEach(function(element, idx, array) {
                 element.profexp.forEach(function(elem, ind, arr) {

@@ -62,7 +62,6 @@ export default {
         this.error = "";
         this.warning = "";
         const url = urldc.getAddDcUrl();
-        //alert(localStorage.getItem("manager_id"));
         let result = await axios.post(url, {
           familyname: this.model.dc.familyname,
           firstname: this.model.dc.firstname,

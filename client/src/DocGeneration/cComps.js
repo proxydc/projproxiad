@@ -1,8 +1,7 @@
 import { Paragraph, TextRun, ImageRun, AlignmentType, HeadingLevel, Tab, TableRow, TableCell, BorderStyle } from "docx";
 import enumImg from "../_helpers/enum-Img";
 import docData from "./tools/DocData";
-import bref from "./cBref";
-import lang from "./cLang";
+
 class cComps {
     static getComp(funcs) {
         const cf = new Paragraph({
