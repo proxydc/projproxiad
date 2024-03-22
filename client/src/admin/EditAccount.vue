@@ -56,13 +56,7 @@ export default {
   },
   mounted() {
     document.getElementById("lbdisplay").focus();
-    this.getAccountData(this.$route.params.id);
-    $(document).keypress(function (e) {
-      if (e.which === 13) {
-        // enter has been pressed, execute a click on .js-new:
-        $(".js-new").first().click();
-      }
-    });
+    this.getAccountData(this.$route.params.id); 
   },
 
   methods: {
