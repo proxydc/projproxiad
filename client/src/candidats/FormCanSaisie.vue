@@ -55,12 +55,7 @@
             :xpAddedCounter="0"
             :maxILength="maxInputLengthTasks"
           />
-        <!--     <ExperiencePerso
-            :projects="dc.document.projectsPerso"
-            :xpAddedCounter="0"
-            :maxILength="maxInputLengthTasks"
-          />-->
-
+          
           <div class="container dc-section">
             <div class="row align-items-center dc-syn-item">
               <div class="col col-2">
@@ -160,7 +155,6 @@ import AbilityTech from "./ChildComponents/DcAbilityTech.vue";
 import Certification from "./ChildComponents/DcCertification.vue";
 import Language from "./ChildComponents/DcLanguage.vue";
 import ExperiencePro from "./ChildComponents/DcExperiencePro.vue";
-import ExperiencePerso from "./ChildComponents/DcExperiencePerso.vue";
 import urldc from "../_helpers/urllist.js";
 import axios from "axios";
 import FormData from "./FormData";
