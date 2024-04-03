@@ -55,7 +55,7 @@
             :xpAddedCounter="0"
             :maxILength="maxInputLengthTasks"
           />
-          
+
           <div class="container dc-section">
             <div class="row align-items-center dc-syn-item">
               <div class="col col-2">
@@ -168,7 +168,6 @@ export default {
     Certification,
     Language,
     ExperiencePro,
-    ExperiencePerso,
   },
   name: "formCandidatSaisie",
   data() {
