@@ -238,20 +238,24 @@ export default {
         this.errormsg = err;
       }
     },
-    saveAndClose(dc) {
+    async saveAndClose(dc) {
       try {
-        FormData.save(
-          this.$route.params.id,
-          dc.document,
-          document,
-          enumDcStatus.Finalisé
-        );
-        const acc = localStorage.getItem("useraccount");
-        if (acc == "admin" || acc == "user") {
-          this.$router.push({ name: "user" });
-        } else {
-          this.$router.push({ name: "PageEnd" });
-        }
+        let generatedDocumentObj = FormData.getDocumentObject(dc.document, document);
+        const url = urldc.getDcUrl(this.$route.params.id); 
+        let result = await axios.put(url, {
+          dc_status: enumDcStatus.Finalisé,
+          document: generatedDocumentObj,
+        });
+        console.warn(result);
+        if (result.status == 201) {
+          alert(result.data);
+          const acc = localStorage.getItem("useraccount");
+          if (acc == "admin" || acc == "user") {
+            this.$router.push({ name: "user" });
+          } else {
+            this.$router.push({ name: "PageEnd" });
+          }
+        } else { throw result; }
       } catch (err) {
         this.errormsg = err;
       }
