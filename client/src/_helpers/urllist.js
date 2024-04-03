@@ -3,7 +3,7 @@ const backEndURL =
         ? process.env.VUE_APP_DBPRODURL
         : process.env.VUE_APP_DBDEVURL;
 const baseURL = backEndURL + "/api/v1/database/";
-const acc = localStorage.getItem("useraccount");
+let acc = localStorage.getItem("useraccount");
 class urllist {
     static getBackEndURL() {
         return backEndURL;
