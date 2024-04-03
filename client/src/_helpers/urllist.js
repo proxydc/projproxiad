@@ -18,6 +18,10 @@ class urllist {
         return baseURL + "account/" + id;
     }
     static getDcsUrl() {
+        if(acc==null)
+        {
+            acc = localStorage.getItem("useraccount");
+        }
         if (acc == "admin") { return baseURL + "dc"; }
         else {
             return baseURL + "dcByManager/" + parseInt(localStorage.getItem("manager_id"));
