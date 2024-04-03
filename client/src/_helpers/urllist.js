@@ -28,6 +28,10 @@ class urllist {
         }
     }
     static getDcUrl(id) {
+        if(acc==null)
+        {
+            acc = localStorage.getItem("useraccount");
+        }
         //const acc= localStorage.getItem("useraccount");
         if (acc == "user" || acc == "admin")
             return baseURL + "dc/" + id;
