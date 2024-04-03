@@ -55,11 +55,11 @@
             :xpAddedCounter="0"
             :maxILength="maxInputLengthTasks"
           />
-          <ExperiencePerso
+        <!--     <ExperiencePerso
             :projects="dc.document.projectsPerso"
             :xpAddedCounter="0"
             :maxILength="maxInputLengthTasks"
-          />
+          />-->
 
           <div class="container dc-section">
             <div class="row align-items-center dc-syn-item">
