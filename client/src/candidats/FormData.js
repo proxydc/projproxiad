@@ -33,32 +33,35 @@ class FormData {
         /* Comp fonctionnelles */
         var domNodes = document.querySelectorAll("#fonct input");
         var nodes = [...domNodes];
-        dc.functionalAbilities = nodes.map((x) => x.value).filter(function(i) { return i.trim() != ""; });
+        dc.functionalAbilities = nodes.map((x) => x.value).filter(function (i) { return i.trim() != ""; });
         console.log("functional: " + dc.functionalAbilities);
 
         /* Comp techniques */
         var domNodes = document.querySelectorAll("#techn input");
         var nodes = [...domNodes];
-        dc.technicalAbilities = nodes.map((x) => x.value).filter(function(i) { return i.trim() != ""; });
+        dc.technicalAbilities = nodes.map((x) => x.value).filter(function (i) { return i.trim() != ""; });
         console.log("technical: " + dc.technicalAbilities);
 
         /* Diplomes */
         var certifications = [];
         var domNodes = document.querySelectorAll("#certs div.row");
         var nodes = [...domNodes];
+        alert(nodes.length);
         for (let i = 0; i < nodes.length; i++) {
-            var year = nodes[i].childNodes[0].childNodes[0].value;
-            var label = nodes[i].childNodes[1].childNodes[0].value;
+            var year = nodes[i].childNodes[0].childNodes[0].childNodes[0].value;
+            var label = nodes[i].childNodes[0].childNodes[1].childNodes[0].value;
             if (year.trim() != "" && label.trim() != "") {
                 certifications.push({ year: year, title: label })
             }
+           
         }
+
         dc.certifications = certifications;
 
         /* Langues */
         var domNodes = document.querySelectorAll("#langs input");
         var nodes = [...domNodes];
-        dc.languages = nodes.map((x) => x.value).filter(function(i) { return i.trim() != ""; });
+        dc.languages = nodes.map((x) => x.value).filter(function (i) { return i.trim() != ""; });
 
         console.log("languages: " + dc.languages);
 
@@ -66,8 +69,7 @@ class FormData {
         var experiencesPro = [];
         var domNodes = document.querySelectorAll("#xps .xp");
         var allNodes = [...domNodes]; // converts a Node list to an array
-        var nodes = allNodes.filter(function(i) { return i.id == "" }) // remove ghost template which have ID
-
+        var nodes = allNodes.filter(function (i) { return i.id == "" }) // remove ghost template which have ID
         for (let i = 0; i < nodes.length; i++) {
             var startValue = nodes[i].childNodes[0].childNodes[0].childNodes[1].value;
             var endValue = nodes[i].childNodes[0].childNodes[1].childNodes[1].value;
@@ -76,14 +78,23 @@ class FormData {
             var contextValue = nodes[i].childNodes[1].childNodes[0].childNodes[1].value;
             var technicalenvValue = nodes[i].childNodes[2].childNodes[1].childNodes[1].value;
 
-            var taskList = nodes[i].childNodes[2].childNodes[0].childNodes[1].childNodes;
-            var taskValues = [];
-            for (let t = 0; t < taskList.length; t++) {
-                if (taskList[t].nodeName == "INPUT" && taskList[t].value) {
-                    taskValues.push(taskList[t].value);
-                }
-            }
+            /* var taskList = nodes[i].childNodes[2].childNodes[0].childNodes;
+             alert("length: "+ taskList.length)
+             var taskValues = [];
+             alert("tlen: "+ nodes[i].childNodes[2].childNodes[0].childNodes[2].childNodes[0].childNodes[0].childNodes[0].nodeName);
+             alert("tlen: "+ nodes[i].childNodes[2].childNodes[0].childNodes[2].childNodes[0].childNodes[0].childNodes[0].value);
+             for (let t = 0; t < taskList.length; t++) {
+                 alert("t1: "+ taskList[t].childNodes[2].childNodes[0].childNodes[0].childNodes[0].value);
+                 taskValues.push(taskList[t].childNodes[2].childNodes[0].childNodes[0].childNodes[0].value);
+                 if (taskList[t].nodeName == "INPUT" && taskList[t].value) {
+                     taskValues.push(taskList[t].value);
+                 }
+             }*/
 
+            var id = `taskxp${i}`;
+            var domNodes = document.querySelectorAll("#" + id + " input");
+            var nodest = [...domNodes];
+            var taskValues = nodest.map((x) => x.value).filter(function (i) { return i.trim() != ""; });
             var currentExperience = {
                 start: startValue,
                 end: endValue,
@@ -93,16 +104,20 @@ class FormData {
                 technical_env: technicalenvValue,
                 tasks: taskValues
             };
+
             if (currentExperience.start != '') {
                 experiencesPro.push(currentExperience)
             }
+
         }
+
         dc.experiencesPro = experiencesPro;
+
         /* Projects perso */
         var personalProjects = [];
         var domNodes = document.querySelectorAll("#projects .project");
         var allNodes = [...domNodes];
-        var nodes = allNodes.filter(function(i) { return i.id == "" }) // remove ghost template which have ID
+        var nodes = allNodes.filter(function (i) { return i.id == "" }) // remove ghost template which have ID
 
         for (let i = 0; i < nodes.length; i++) {
             var periodValue = nodes[i].childNodes[0].childNodes[0].childNodes[1].value;
@@ -133,6 +148,7 @@ class FormData {
         }
 
         dc.projectsPerso = personalProjects;
+
         return dc;
     }
 }

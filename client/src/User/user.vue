@@ -34,19 +34,19 @@
             <td class="text-start">{{ acRow.status_name }}</td>
             <td class="text-start">{{ acRow.tags }}</td>
             <td>
-              <a class="btn btn-success mx-2" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Edit the candidat!">
-                Edit
+              <a class="btn btn-success mx-2" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Modifier le candidat!">
+                Modifier
               </a>
-              <b-button type="button" class="btn btn-danger mx-2" @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Delete the candidat!">
-                Delete
+              <b-button type="button" class="btn btn-danger mx-2" @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Supprimer le candidat!">
+                Supprimer
               </b-button>
-              <a class=" btn btn-outline-success btn-sm" :href="'/#/formCandidatSaisie/' + acRow.id" target="_blank" v-b-tooltip.hover title="See the candidat!">
+              <a class=" btn btn-outline-success btn-sm" :href="'/#/formCandidatSaisie/' + acRow.id" target="_blank" v-b-tooltip.hover title="Voir le dossier de candidat!">
                 Voir le dossier
               </a>
               <img type="button" class="btn btn-outline-warning btn-sm" src="../assets/copyimage.png"
                 @click="CopyUrl(acRow.id)" />
-              <a class=" btn btn-outline-primary btn-sm mx-2" :href="'/#/dcDownload/' + acRow.id" target="_blank" v-b-tooltip.hover title="Download the document!">
-                Download
+              <a class=" btn btn-outline-primary btn-sm mx-2" :href="'/#/dcDownload/' + acRow.id" target="_blank" v-b-tooltip.hover title="Télécharger le document!">
+                Télécharger
               </a>
             </td>
           </tr>
@@ -85,7 +85,7 @@ export default {
     getDCs() {
       try {
         const url = urldc.getDcsUrl();
-       // alert("url: "+url);
+        alert("url: "+url);
         axios.get(url).then((res) => {
           console.log(res.data);
           switch (res.status) {

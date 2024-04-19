@@ -2,7 +2,15 @@
 import { ref } from "vue";
 export default {
   props: {
-    experiences: [],
+    experiences: [{
+      start:"",
+      end:"",
+      context:"",
+      title:"",
+      company:"",
+      technical_env:"",
+      tasks:[],
+    }],
     maxILength: {
       type: Number,
       required: true,
@@ -29,7 +37,7 @@ export default {
         var container = document.getElementById(id);
         var newInput = document.createElement("input");
         newInput.classList = "form-control dc-vlist dc-tmp";
-        newInput.maxLength = len; 
+        newInput.maxLength = len;
         container.appendChild(newInput);
 
       })
@@ -39,9 +47,29 @@ export default {
       var container = document.getElementById("taskxp" + index);
       var newInput = document.createElement("input");
       newInput.classList = "form-control dc-vlist dc-tmp";
-      newInput.maxLength = len; 
+      newInput.maxLength = len;
       container.appendChild(newInput);
     },
+    remove(index) {
+      this.experiences.splice(index, 1);
+    },
+    add(index) {
+      this.experiences.push({
+      start:"",
+      end:"",
+      context:"",
+      title:"",
+      company:"",
+      technical_env:"",
+      tasks:[],
+    });
+    },
+    tremove(index, tindex) {
+      this.experiences[index].tasks.splice(tindex, 1);
+    },
+    tadd(index) {    
+      this.experiences[index].tasks.push('');     
+    }
   },
 };
 const xpAddedCounter = ref(0);
@@ -78,27 +106,52 @@ const xpAddedCounter = ref(0);
           <div class="row">
             <div class="col">
               <label for="context">Contexte</label>
-              <textarea class="form-control" placeholder="..." id="context" v-model="experience.context" />
+              <textarea type="text" class="form-control" placeholder="..." id="context" :value="experience.context" />
             </div>
           </div>
           <div class="row">
             <div class="col">
-              <label for="">Compétences/ Tâches</label>
-              <div v-bind:id="`taskxp${index}`">
-                <input v-for="(task, index) in experience.tasks" :value="task" :key="index" class="form-control dc-vlist" :maxlength="maxILength" 
-                  type="text" />
+              <div class="row">
+                <label for="">Compétences/ Tâches</label>
               </div>
-              <button class="btn btn-outline-primary btn-sm" @click="addRowTaskXp(`${index}`, maxILength)">
+              <div v-bind:id="`taskxp${index}`" class="form-group" v-for="(task, tindex) in experience.tasks"
+                :key="tindex">
+                <div class="row">
+                  <div class="input-group align-items-center ">
+                    <div class="col col-11">
+                      <input :value="task" :key="tindex" class="form-control dc-vlist" :maxlength="maxILength"
+                        type="text" />
+                    </div>
+                    <div class="col">
+                      <i class="bi bi-plus-circle" style="color: green" @click="tadd(index, tindex+1)"
+                        v-show="tindex == experience.tasks.length - 1" />
+                      <i class="bi bi-dash-circle m-1" style="color: red" @click="tremove(index, tindex)"
+                        v-show="tindex || (!tindex && experience.tasks.length > 1)" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+             <i class="bi bi-plus-circle" style="color: green" @click="tadd(index, 0)"
+                v-show="experience.tasks.length==0" />
+             <!--   <button class="btn btn-outline-primary btn-sm" @click="addRowTaskXp(`${index}`, maxILength)">
                 Ajouter une ligne
-              </button>
+              </button>-->
             </div>
             <div class="col">
               <label for="envt">Environnement technique</label>
-              <textarea class="form-control dc-ta-envt" placeholder="..." v-model="experience.technical_env" />
+              <textarea class="form-control dc-ta-envt" placeholder="..." :value="experience.technical_env" />
+            </div>
+          </div>
+          <div class="row input-group">
+            <div class="col col-11"></div>
+            <div class="col"><i class="bi bi-plus-circle" style="color: green" @click="add(index)"
+                v-show="index == experiences.length - 1" />
+              <i class="bi bi-dash-circle m-1" style="color: red" @click="remove(index)"
+                v-show="index || (!index && experiences.length > 1)" />
             </div>
           </div>
         </div>
-
+        <i class="bi bi-plus-circle" style="color: green" @click="add(0)" v-show="experiences == null" />
         <div class="xp" id="ghost_xp_pro" style="display: none; /* Template for new XP */">
           <div class="row">
             <div class="col col-2">

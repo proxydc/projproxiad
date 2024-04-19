@@ -1,4 +1,5 @@
 <script>
+import $ from "jquery";
 export default {
   props: {
     languages: [],
@@ -9,39 +10,77 @@ export default {
   },
   methods: {
     addRow(len) {
+       var newdiv = document.createElement("div");
+      newdiv.classList = "input-group align-items-center";
+      var newdivcol11 = document.createElement("div");
+      newdivcol11.classList = "col col-11";
       var newInput = document.createElement("input");
       newInput.setAttribute("list", "languages");
       newInput.classList = "form-control dc-vlist";
       newInput.maxLength = len; 
-      var newcol = document.createElement("div");
-      newcol.classList = "col dc-tmp";
-      newcol.appendChild(newInput);
-      document.getElementById("langs").appendChild(newcol);
+      //button to do and append
+      var newdivcol = document.createElement("div");
+      newdivcol.classList = "col";
+      var newbutton = document.createElement("button");
+      newbutton.classList = "btn";
+      newbutton.id = "DeleteRow";
+      var newI = document.createElement("i");
+      newI.setAttribute("style", "color: red");
+      newI.classList = "bi bi-dash-circle";
+      newbutton.appendChild(newI);
+      newdivcol.appendChild(newbutton);
+      newdivcol11.appendChild(newInput);
+      newdiv.appendChild(newdivcol11);
+      newdiv.appendChild(newdivcol);
+
+      var newdivRow = document.createElement("div");
+      newdivRow.setAttribute("id", "row");
+      newdivRow.appendChild(newdiv);
+      let befornode = document.getElementById("btnElement");
+ 
+      document.getElementById("langs").appendChild(newdivRow);
+    /* var newRowAdd =
+        '<div id="row"> <div class="input-group align-items-center">' +       
+        '<div class="col col-11"><input type="text" list="languages" class="form-control dc-vlist" :maxlength="maxILength"></div>' +
+        '<div class="col">' +
+        '<button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle" style="color: red"></i> </button>' +
+        '</div> </div> </div>';
+
+      $('#langs').append(newRowAdd);*/
     },
   },
 };
 
-function saveData() {
-  var domNodes = document.querySelectorAll("#langs input");
-  var nodes = [...domNodes]; // converts a Node list to an array
-  var values = nodes
-    .map((x) => x.value)
-    .filter(function (i) {
-      return i.trim() != "";
-    }); //delete empty values (ES5 syntax for old browser)
-  emit("update:languages", values);
-}
+$("body").on("click", "#DeleteRow", function () {
+  $(this).parents("#row").remove();
+});
+
 </script>
 
 <template>
   <div>
-    <div class="row">
       <h5>Langues</h5>
       <div id="langs">
-        <div class="col" v-for="(language, index) in languages" :key="language">
-          <input class="form-control dc-vlist" list="languages" type="text" :value="language" :key="index" />
+      <div class="form-group" v-for="(language, index) in languages" :key="language">
+        <div id="row">
+          <div class="input-group align-items-center"> 
+            <div class="col col-11">          
+              <input class="form-control dc-vlist" list="languages"  type="text" :value="language" :maxlength="maxILength" :key="index" />
+              </div> 
+              <div class="col">
+              <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle" style="color: red"></i> </button>
+            </div> 
+          </div>
         </div>
+      </div>     
+    </div>
+    <div id="btnElement" class="row">
+      <div class="col text-center">
+        <button type="button" class="btn btn-outline-info btn-sm" @click="addRow(maxILength)">
+          Ajouter une langue
+        </button>
       </div>
+    </div>
     </div>
     <datalist id="languages">
       <option value="Français"></option>
@@ -50,12 +89,5 @@ function saveData() {
       <option value="Espagnol"></option>
       <option value="Italien"></option>
     </datalist>
-    <div class="row">
-      <div class="col text-center">
-        <button type="button" class="btn btn-outline-info btn-sm" @click="addRow(maxILength)">
-          Ajouter une langue
-        </button>
-      </div>
-    </div>
-  </div>
+   
 </template>
