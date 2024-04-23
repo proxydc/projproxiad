@@ -9,7 +9,7 @@
             <input :value="ability" :maxlength="maxILength" class="form-control dc-vlist" type="text" />
           </div>
           <div class="col">            
-            <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle" style="color: red"></i> </button>
+            <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle" style="color: red" data-toggle="tooltip" data-placement="top" title="Supprimer ce compétence"></i> </button>
           </div>
         </div>
       </div>
@@ -17,9 +17,7 @@
   </div>
   <div id="btnElement" class="row">
       <div class="col text-center">
-        <button type="button" class="btn btn-outline-info btn-sm" @click="addRow(maxILength)">
-          Ajouter une langue
-        </button>
+        <i class="bi bi-plus-circle" style="color: green" @click="addRow(maxILength)" data-toggle="tooltip" data-placement="top" title="Ajouter une compétence"/>
       </div>
     </div>
   </div>
@@ -55,7 +53,6 @@ export default {
       var newdivcol11 = document.createElement("div");
       newdivcol11.classList = "col col-11";
       var newInput = document.createElement("input");
-      //newInput.setAttribute("list", "languages");
       newInput.classList = "form-control dc-vlist";
       newInput.maxLength = len; 
       //button to do and append
@@ -66,6 +63,10 @@ export default {
       newbutton.id = "DeleteRow";
       var newI = document.createElement("i");
       newI.setAttribute("style", "color: red");
+      //data-toggle="tooltip" data-placement="top" title="Supprimer ce compétence"
+      newI.setAttribute("data-toggle", "tooltip");
+     // newI.setAttribute("data-placement", "top");
+      newI.setAttribute("title", "Supprimer ce compétence");
       newI.classList = "bi bi-dash-circle";
       newbutton.appendChild(newI);
       newdivcol.appendChild(newbutton);

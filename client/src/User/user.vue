@@ -20,7 +20,7 @@
           <tr>
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
-            <th scope="col">Email</th>
+            <th scope="col">RH</th>
             <th scope="col">Status</th>
             <th scope="col">Tags</th>
             <th scope="col">Actions</th>
@@ -30,11 +30,11 @@
           <tr v-for="(acRow, index) in this.AcRows" :key="index">
             <td class="text-start">{{ acRow.familyname }}</td>
             <td class="text-start">{{ acRow.firstname }}</td>
-            <td class="text-start">{{ acRow.email }}</td>
+            <td class="text-start">{{ acRow.manager_name }}</td>
             <td class="text-start">{{ acRow.status_name }}</td>
             <td class="text-start">{{ acRow.tags }}</td>
             <td>
-              <a class="btn btn-success mx-2" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Modifier le candidat!">
+            <!--  <a class="btn btn-success mx-2" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Modifier le candidat!">
                 Modifier
               </a>
               <b-button type="button" class="btn btn-danger mx-2" @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Supprimer le candidat!">
@@ -47,7 +47,12 @@
                 @click="CopyUrl(acRow.id)" />
               <a class=" btn btn-outline-primary btn-sm mx-2" :href="'/#/dcDownload/' + acRow.id" target="_blank" v-b-tooltip.hover title="Télécharger le document!">
                 Télécharger
-              </a>
+              </a>-->
+              <a class="bi bi-pencil-square btn btn-outline-success btn-sm" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Edit the candidat!" />
+              <b-button type="button" class="bi bi-trash3 btn btn-outline-danger btn-sm mx-1" @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Delete the candidat!" />
+              <a class="bi bi-eye-fill btn btn-outline-success btn-sm mx-1" :href="'/#/formCandidatSaisie/' + acRow.id" target="_blank" v-b-tooltip.hover title="See the candidat!" />
+              <button class="bi bi-copy btn btn-outline-success btn-sm mx-1" @click="CopyUrl(acRow.id)" v-b-tooltip.hover title="Copy the URL" />
+              <a class="bi bi-download btn btn-outline-primary btn-sm mx-1" :href="'/#/dcDownload/' + acRow.id" target="_blank" v-b-tooltip.hover title="Download the document!" />
             </td>
           </tr>
         </tbody>
@@ -85,7 +90,7 @@ export default {
     getDCs() {
       try {
         const url = urldc.getDcsUrl();
-        alert("url: "+url);
+        //alert("url: "+url);
         axios.get(url).then((res) => {
           console.log(res.data);
           switch (res.status) {

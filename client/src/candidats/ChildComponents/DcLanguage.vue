@@ -26,6 +26,8 @@ export default {
       newbutton.id = "DeleteRow";
       var newI = document.createElement("i");
       newI.setAttribute("style", "color: red");
+      newI.setAttribute("data-toggle", "tooltip");
+      newI.setAttribute("title", "Supprimer ce langue");
       newI.classList = "bi bi-dash-circle";
       newbutton.appendChild(newI);
       newdivcol.appendChild(newbutton);
@@ -68,7 +70,7 @@ $("body").on("click", "#DeleteRow", function () {
               <input class="form-control dc-vlist" list="languages"  type="text" :value="language" :maxlength="maxILength" :key="index" />
               </div> 
               <div class="col">
-              <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle" style="color: red"></i> </button>
+              <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle" style="color: red" data-toggle="tooltip" title="Supprimer ce langue"></i> </button>
             </div> 
           </div>
         </div>
@@ -76,9 +78,7 @@ $("body").on("click", "#DeleteRow", function () {
     </div>
     <div id="btnElement" class="row">
       <div class="col text-center">
-        <button type="button" class="btn btn-outline-info btn-sm" @click="addRow(maxILength)">
-          Ajouter une langue
-        </button>
+        <i class="bi bi-plus-circle" style="color: green" @click="addRow(maxILength)" data-toggle="tooltip" data-placement="top" title="Ajouter une langue"/>
       </div>
     </div>
     </div>

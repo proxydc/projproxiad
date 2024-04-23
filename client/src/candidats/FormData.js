@@ -46,7 +46,6 @@ class FormData {
         var certifications = [];
         var domNodes = document.querySelectorAll("#certs div.row");
         var nodes = [...domNodes];
-        alert(nodes.length);
         for (let i = 0; i < nodes.length; i++) {
             var year = nodes[i].childNodes[0].childNodes[0].childNodes[0].value;
             var label = nodes[i].childNodes[0].childNodes[1].childNodes[0].value;
@@ -71,30 +70,21 @@ class FormData {
         var allNodes = [...domNodes]; // converts a Node list to an array
         var nodes = allNodes.filter(function (i) { return i.id == "" }) // remove ghost template which have ID
         for (let i = 0; i < nodes.length; i++) {
-            var startValue = nodes[i].childNodes[0].childNodes[0].childNodes[1].value;
-            var endValue = nodes[i].childNodes[0].childNodes[1].childNodes[1].value;
-            var titleValue = nodes[i].childNodes[0].childNodes[2].childNodes[1].value;
-            var companyValue = nodes[i].childNodes[0].childNodes[3].childNodes[1].value;
-            var contextValue = nodes[i].childNodes[1].childNodes[0].childNodes[1].value;
-            var technicalenvValue = nodes[i].childNodes[2].childNodes[1].childNodes[1].value;
+            var startValue = nodes[i].childNodes[0].childNodes[0].childNodes[0].childNodes[1].value;
+            var endValue = nodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[1].value;
+            var titleValue = nodes[i].childNodes[0].childNodes[0].childNodes[2].childNodes[1].value;
+            var companyValue = nodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[1].value;
+            var contextValue = nodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].value;
+            var technicalenvValue = nodes[i].childNodes[0].childNodes[2].childNodes[1].childNodes[1].value;
 
-            /* var taskList = nodes[i].childNodes[2].childNodes[0].childNodes;
-             alert("length: "+ taskList.length)
-             var taskValues = [];
-             alert("tlen: "+ nodes[i].childNodes[2].childNodes[0].childNodes[2].childNodes[0].childNodes[0].childNodes[0].nodeName);
-             alert("tlen: "+ nodes[i].childNodes[2].childNodes[0].childNodes[2].childNodes[0].childNodes[0].childNodes[0].value);
-             for (let t = 0; t < taskList.length; t++) {
-                 alert("t1: "+ taskList[t].childNodes[2].childNodes[0].childNodes[0].childNodes[0].value);
-                 taskValues.push(taskList[t].childNodes[2].childNodes[0].childNodes[0].childNodes[0].value);
-                 if (taskList[t].nodeName == "INPUT" && taskList[t].value) {
-                     taskValues.push(taskList[t].value);
-                 }
-             }*/
+            var taskList = nodes[i].childNodes[0].childNodes[2].childNodes[0].childNodes[1].childNodes;
+            var taskValues = [];
+            for (let t = 0; t < taskList.length; t++) {
+                if (taskList[t].nodeName == "INPUT" && taskList[t].value) {
+                    taskValues.push(taskList[t].value);
+                }
+            }
 
-            var id = `taskxp${i}`;
-            var domNodes = document.querySelectorAll("#" + id + " input");
-            var nodest = [...domNodes];
-            var taskValues = nodest.map((x) => x.value).filter(function (i) { return i.trim() != ""; });
             var currentExperience = {
                 start: startValue,
                 end: endValue,

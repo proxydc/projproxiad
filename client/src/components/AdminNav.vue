@@ -3,9 +3,9 @@
     <nav class="navbar navbar-dark bg-info navbar-expand-lg">
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item">
+         <!-- <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
-          </li>
+          </li>-->
           <li class="nav-item">
             <button class="nav-link active" aria-current="page" v-on:click="pageCandidats">Candidats</button>
           </li>

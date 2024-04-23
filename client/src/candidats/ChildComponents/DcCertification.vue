@@ -40,6 +40,8 @@ export default {
       newbutton.id = "DeleteRow";
       var newI = document.createElement("i");
       newI.setAttribute("style", "color: red");
+      newI.setAttribute("data-toggle", "tooltip");
+      newI.setAttribute("title", "Supprimer ce certification");
       newI.classList = "bi bi-dash-circle";
       newbutton.appendChild(newI);
       newdivcol.appendChild(newbutton);
@@ -91,7 +93,7 @@ const certAddedCounter = ref(0);
               :maxlength="maxILength" />
           </div>
           <div class="col">
-            <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle" style="color: red"></i>
+            <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle" style="color: red"  data-toggle="tooltip" title="Supprimer ce certification"></i>
             </button>
           </div>
         </div>
@@ -100,9 +102,7 @@ const certAddedCounter = ref(0);
     </div>
     <div id="btnElement" class="row">
       <div class="col text-center">
-        <button type="button" class="btn btn-outline-info btn-sm" @click="addRow(maxILength)">
-          Ajouter un diplôme / une certification
-        </button>
+        <i class="bi bi-plus-circle" style="color: green" @click="addRow(maxILength)" data-toggle="tooltip" data-placement="top" title="Ajouter un diplôme / une certification"/>
       </div>
     </div>
   </div>
