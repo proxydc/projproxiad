@@ -69,24 +69,32 @@ class FormData {
         var domNodes = document.querySelectorAll("#xps .xp");
         var allNodes = [...domNodes]; // converts a Node list to an array
         var nodes = allNodes.filter(function (i) { return i.id == "" }) // remove ghost template which have ID
-        for (let i = 0; i < nodes.length; i++) {
+        //alert("len: "+ nodes.length);
+       for (let i = 0; i < nodes.length; i++) {
+           // alert("iam here 1");
             var startValue = nodes[i].childNodes[0].childNodes[0].childNodes[0].childNodes[1].value;
             var endValue = nodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[1].value;
             var titleValue = nodes[i].childNodes[0].childNodes[0].childNodes[2].childNodes[1].value;
             var companyValue = nodes[i].childNodes[0].childNodes[0].childNodes[3].childNodes[1].value;
             var contextValue = nodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].value;
             var technicalenvValue = nodes[i].childNodes[0].childNodes[2].childNodes[1].childNodes[1].value;
-
-            var taskList = nodes[i].childNodes[0].childNodes[2].childNodes[0].childNodes[1].childNodes;
+           // alert("iam here 11");
+            var domtaskNodes = nodes[i].querySelectorAll(".dc-taskinputlist input");
+           // alert("iam here 2");
+            var alltaskNodes = [...domtaskNodes]; // converts a Node list to an array
+            //alert("iam here 3");
+            var tasknodes = alltaskNodes.filter(function (i) { return i.id == "" }) 
+            //alert("nodelen: "+ tasknodes.length);
             var taskValues = [];
-            for (let t = 0; t < taskList.length; t++) {
-                if (taskList[t].nodeName == "INPUT" && taskList[t].value) {
-                    taskValues.push(taskList[t].value);
+            for (let t = 0; t < tasknodes.length; t++) {
+                //alert("item: "+ tasknodes[t].value);
+                if(tasknodes[t].nodeName=="INPUT" && tasknodes[t].value)
+                {
+                    taskValues.push(tasknodes[t].value);
                 }
             }
-
             var currentExperience = {
-                start: startValue,
+               start: startValue,
                 end: endValue,
                 title: titleValue,
                 company: companyValue,
@@ -99,7 +107,7 @@ class FormData {
                 experiencesPro.push(currentExperience)
             }
 
-        }
+        }      
 
         dc.experiencesPro = experiencesPro;
 
