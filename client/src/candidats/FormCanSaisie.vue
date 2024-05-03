@@ -4,72 +4,44 @@
       <div class="container">
         <p class="h2 dc-page-title">Dossier de compétences</p>
       </div>
-      <div
-        v-if="errormsg"
-        class="alert alert-danger alert-dismissible fade show"
-      >
+      <div v-if="errormsg" class="alert alert-danger alert-dismissible fade show">
         <strong>Error!</strong> <br />{{ errormsg }}
       </div>
       <div class="container p-3 my-5 bg-light border border-primary dc-form">
         <form action="" @submit.prevent="onSubmit">
-          <dcIdentity
-            :familyname="dc.familyname"
-            :firstname="dc.firstname"
-            :email="dc.email"
-          />
+          <dcIdentity :familyname="dc.familyname" :firstname="dc.firstname" :email="dc.email" />
           <div class="row dc-section">
             <div class="col">
-              <AbilityFonc
-                title="Compétences fonctionnelles"
-                uid="fonct"
-                :maxILength="maxInputLength"
-                :functionalAbilities="dc.document.functionalAbilities"
-              />
+              <AbilityFonc title="Compétences fonctionnelles" uid="fonct" :maxILength="maxInputLength"
+                :functionalAbilities="dc.document.functionalAbilities" />
             </div>
             <div class="col">
-              <AbilityTech
-                title="Compétences techniques"
-                uid="techn"
-                :maxILength="maxInputLength"
-                :functionalAbilities="dc.document.technicalAbilities"
-              />
+              <AbilityTech title="Compétences techniques" uid="techn" :maxILength="maxInputLength"
+                :functionalAbilities="dc.document.technicalAbilities" />
             </div>
           </div>
           <div class="row dc-section">
             <div class="col">
-              <Certification
-                :certifications="dc.document.certifications"
-                :maxILength="maxInputLength"
-              />
+              <Certification :certifications="dc.document.certifications" :maxILength="maxInputLength" />
             </div>
             <div class="col">
-              <Language
-                :languages="dc.document.languages"
-                :maxILength="maxInputLength"
-              />
+              <Language :languages="dc.document.languages" :maxILength="maxInputLength" />
             </div>
           </div>
 
-          <ExperiencePro
-            :experiences="dc.document.experiencesPro"
-            :xpAddedCounter="0"
-            :maxILength="maxInputLengthTasks"
-          />
+          <ExperiencePro :experiences="dc.document.experiencesPro" :xpAddedCounter="0"
+            :maxILength="maxInputLengthTasks" />
+          <ExperiencePerso :projects="dc.document.projectsPerso" :xpAddedCounter="0"
+            :maxILength="maxInputLengthTasks" />
 
           <div class="container dc-section">
             <div class="row align-items-center dc-syn-item">
               <div class="col col-2">
-                <label class="col-form-label" for="syn_env"
-                  >Environnement</label
-                >
+                <label class="col-form-label" for="syn_env">Environnement</label>
               </div>
               <div class="col col-8">
-                <input
-                  @keydown.enter="focusnext"
-                  class="form-control"
-                  id="syn_env"
-                  v-model="dc.document.skills.environments"
-                />
+                <input @keydown.enter="focusnext" class="form-control" id="syn_env"
+                  v-model="dc.document.skills.environments" />
               </div>
             </div>
             <div class="row align-items-center dc-syn-item">
@@ -77,12 +49,8 @@
                 <label class="col-form-label" for="syn_lang">Langages</label>
               </div>
               <div class="col-8">
-                <input
-                  @keydown.enter="focusnext"
-                  class="form-control"
-                  id="syn_lang"
-                  v-model="dc.document.skills.languages"
-                />
+                <input @keydown.enter="focusnext" class="form-control" id="syn_lang"
+                  v-model="dc.document.skills.languages" />
               </div>
             </div>
             <div class="row align-items-center dc-syn-item">
@@ -90,12 +58,8 @@
                 <label class="col-form-label" for="syn_bdd">SGBD</label>
               </div>
               <div class="col-8">
-                <input
-                  @keydown.enter="focusnext"
-                  class="form-control"
-                  id="syn_bdd"
-                  v-model="dc.document.skills.databases"
-                />
+                <input @keydown.enter="focusnext" class="form-control" id="syn_bdd"
+                  v-model="dc.document.skills.databases" />
               </div>
             </div>
             <div class="row align-items-center dc-syn-item">
@@ -103,12 +67,8 @@
                 <label class="col-form-label" for="syn_out">Outils</label>
               </div>
               <div class="col-8">
-                <input
-                  @keydown.enter="focusnext"
-                  class="form-control"
-                  id="syn_out"
-                  v-model="dc.document.skills.tools"
-                />
+                <input @keydown.enter="focusnext" class="form-control" id="syn_out"
+                  v-model="dc.document.skills.tools" />
               </div>
             </div>
             <div class="row align-items-center dc-syn-item">
@@ -116,26 +76,18 @@
                 <label class="col-form-label" for="syn_sys">Systèmes</label>
               </div>
               <div class="col-8">
-                <input
-                  @keydown.enter="focusnext"
-                  class="form-control"
-                  id="syn_sys"
-                  v-model="dc.document.skills.systems"
-                />
+                <input @keydown.enter="focusnext" class="form-control" id="syn_sys"
+                  v-model="dc.document.skills.systems" />
               </div>
             </div>
-          </div>    
+          </div>
           <div class="row dc-section">
             <div class="col text-center">
               <div class="btn-group" role="group">
                 <button type="button" class="btn btn-primary" @click="save(dc)">
                   Enregistrer
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-warning"
-                  @click="saveAndClose(dc)"
-                >
+                <button type="button" class="btn btn-warning" @click="saveAndClose(dc)">
                   Marquer comme finalisé
                 </button>
               </div>
@@ -155,6 +107,7 @@ import AbilityTech from "./ChildComponents/DcAbilityTech.vue";
 import Certification from "./ChildComponents/DcCertification.vue";
 import Language from "./ChildComponents/DcLanguage.vue";
 import ExperiencePro from "./ChildComponents/DcExperiencePro.vue";
+import ExperiencePerso from "./ChildComponents/DcExperiencePerso.vue";
 import urldc from "../_helpers/urllist.js";
 import axios from "axios";
 import FormData from "./FormData";
@@ -168,6 +121,7 @@ export default {
     Certification,
     Language,
     ExperiencePro,
+    ExperiencePerso,
   },
   name: "formCandidatSaisie",
   data() {
@@ -217,7 +171,7 @@ export default {
           if (res.status == 200) {
             this.form = res.data;
           }
-          else{
+          else {
             this.$router.push({ name: "NotFound" });
           }
         });
@@ -233,7 +187,7 @@ export default {
           document,
           enumDcStatus.Saisie_Encours
         );
-        location.reload();        
+        location.reload();
       } catch (err) {
         this.errormsg = err;
       }
@@ -241,7 +195,7 @@ export default {
     async saveAndClose(dc) {
       try {
         let generatedDocumentObj = FormData.getDocumentObject(dc.document, document);
-        const url = urldc.getDcUrl(this.$route.params.id); 
+        const url = urldc.getDcUrl(this.$route.params.id);
         let result = await axios.put(url, {
           dc_status: enumDcStatus.Finalisé,
           document: generatedDocumentObj,
