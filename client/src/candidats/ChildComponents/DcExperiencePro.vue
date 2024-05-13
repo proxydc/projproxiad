@@ -170,10 +170,17 @@ $("body").on("click", "#DeleteRowTask", function () {
                 <textarea class="form-control dc-ta-envt" placeholder="..." :value="experience.technical_env" />
               </div>
             </div>
-            <div class="row">
+           <!-- <div class="row">
               <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle-fill" style="color: red"
                   data-toggle="tooltip" data-placement="top" title="Supprimer ce expérience"></i>
               </button>
+            </div>-->
+            <div class="rowtext-center">
+              <div class="col">
+                <button class="btn btn-outline-danger btn-sm" id="DeleteRow" type="button">
+                  Supprimer cette expérience professionnelle
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -216,18 +223,32 @@ $("body").on("click", "#DeleteRowTask", function () {
                 <textarea class="form-control dc-ta-envt" placeholder="..."></textarea>
               </div>
             </div>
-            <div class="row">
+           <!-- <div class="row">
               <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle-fill" style="color: red"
                   data-toggle="tooltip" data-placement="top" title="Supprimer ce expérience"></i>
               </button>
+            </div>-->
+            <div class="rowtext-center">
+              <div class="col">
+                <button class="btn btn-outline-danger btn-sm" id="DeleteRow" type="button">
+                  Supprimer cette expérience professionnelle
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <button class="btn" type="button">
+     <!-- <button class="btn" type="button">
       <i class="bi bi-plus-circle" style="color: green" @click="addRowXpPro(maxILength)" data-toggle="tooltip"
         data-placement="top" title="Nouvelle experience professionnelle" />
-      </button>
+      </button>-->
+      <div class="row text-center">
+        <div class="col">
+          <button type="button" class="btn btn-outline-info btn-sm" @click="addRowXpPro(maxILength)">
+            Nouvelle expérience professionnelle
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>

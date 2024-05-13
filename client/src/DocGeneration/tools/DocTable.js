@@ -1,4 +1,5 @@
 import exppro from "../../DocGeneration/cExpPro";
+import expperso from "../../DocGeneration/cExpPerso.js";
 import comp from "../../DocGeneration/cComps";
 import certs from "../../DocGeneration/cCerts";
 import bref from "../../DocGeneration/cBref";
@@ -157,7 +158,86 @@ class DocTable {
                 }
             });
         }
-        //EXP PROFESSIONNELLES *********    END *****************         
+        //EXP PROFESSIONNELLES *********    END *****************   
+        
+         //EXP PERSONNELLES *********    START   *****************
+         nblines = 0;
+         linesperpages = [];
+         page = 0;
+         nbexps = 0;
+         nblinesaffectedsurpage = 0;
+         exppros = [];
+         if (docjs.projectsPerso != "" && docjs.projectsPerso != null && docjs.projectsPerso.length > 0) {
+             table.addChildElement(tbrow.getBlankTableRowPageBreak());
+             table.addChildElement(tbrow.getExpTitle("Principales Expériences Personnelles"));
+             table.addChildElement(tbrow.getBlankTableRowDoubleLineBreak());
+             for (let index = 0; index < docjs.projectsPerso.length; index++) {
+                 nbexps += 1;
+                 //get number of lines per exp and add to a variable
+                 nblines += expperso.getNblinesPerso(docjs.projectsPerso[index], index);
+                 let lens = docjs.projectsPerso.length - 1;
+
+                 //compare the number of lines and should not exceed 40 lines or must be a last exp in the list
+                 if (nblines > 40 || index == lens) {
+                     // alert("Iam here: " + index);
+                     //if the below condition is true, update number of lines affected in the current page
+                     if (index == lens && nblines < 41) {
+                         nblinesaffectedsurpage = nblines;
+                     }
+                     nbexps -= 1;
+                     //Find if the page has one and only one expapply below condition
+                     if (nbexps == 0) {
+                         nbexps = 1;
+                         exppros.push(docjs.projectsPerso[index]);
+                     } else {
+                         //verify the below condition and add the exp to the current page
+                         if (index == lens && nblines <= 40) {
+                             exppros.push(docjs.experiencesPro[index]);
+                         }
+                     }
+                     page += 1;
+                     //For verification and manipulation of experience index in the list, one list of pages is created
+                     linesperpages.push({ num: page, nblinespage: nblinesaffectedsurpage, profexp: exppros });
+                     let temp = 0;
+                     linesperpages.forEach(element => {
+                         temp += element.profexp.length;
+                     });
+                     let compare = index + 1;
+                     if (temp != compare) {
+                         index -= 1;
+                     }
+                     //Finally initiate the variables as zero or null
+                     nblines = 0;
+                     nbexps = 0;
+                     exppros = [];
+                 } else {
+                     //update number of lines affected in the current page
+                     nblinesaffectedsurpage = nblines;
+                     //add the exp to the current page
+                     exppros.push(docjs.projectsPerso[index]);
+                 }
+             }
+             //Verification of the creation of the pages while debugging
+             /*for (let k = 0; k < linesperpages.length; k++) {
+                 alert("Page num: " + linesperpages[k].num);
+                 alert("nblinespage: " + linesperpages[k].nblinespage);
+                 alert("Nb exps pour ce page: " + linesperpages[k].profexp.length);
+             }*/
+             //Created page list is added to the document table
+             linesperpages.forEach(function(element, idx, array) {
+                 element.profexp.forEach(function(elem, ind, arr) {
+                     table.addChildElement(tbrow.getProjectsTableRow(elem));
+                     if (ind != arr.length - 1) {
+                         table.addChildElement(tbrow.getBlankTableRowDoubleLineBreak());
+                     }
+                 });
+                 if (idx != array.length - 1) {
+                     table.addChildElement(tbrow.getBlankTableRowPageBreak());
+                 }
+             });
+         }
+         //EXP PERSONNELLES *********    END    *****************
+        
         return table;
     }
 }

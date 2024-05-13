@@ -118,19 +118,37 @@ class FormData {
         var nodes = allNodes.filter(function (i) { return i.id == "" }) // remove ghost template which have ID
 
         for (let i = 0; i < nodes.length; i++) {
-            var periodValue = nodes[i].childNodes[0].childNodes[0].childNodes[1].value;
-            var titleValue = nodes[i].childNodes[0].childNodes[1].childNodes[1].value;
-            var contextValue = nodes[i].childNodes[1].childNodes[0].childNodes[1].value;
-            var technicalenvValue = nodes[i].childNodes[2].childNodes[1].childNodes[1].value;
+            //alert("iam here 1 ");
+            var periodValue = nodes[i].childNodes[0].childNodes[0].childNodes[0].childNodes[1].value;
+           //alert("iam here 2 " + periodValue);
+            var titleValue = nodes[i].childNodes[0].childNodes[0].childNodes[1].childNodes[1].value;
+           // alert("iam here 3 "+ titleValue);
+            var contextValue = nodes[i].childNodes[0].childNodes[1].childNodes[0].childNodes[1].value;
+            //alert("iam here 4 " + contextValue);
+            var technicalenvValue = nodes[i].childNodes[0].childNodes[2].childNodes[1].childNodes[1].value;
+           // alert("iam here 5 " + technicalenvValue);
 
-            var taskList = nodes[i].childNodes[2].childNodes[0].childNodes[1].childNodes;
+            /*var taskList = nodes[i].childNodes[2].childNodes[0].childNodes[1].childNodes;
             var taskValues = [];
             for (let t = 0; t < taskList.length; t++) {
                 if (taskList[t].nodeName == "INPUT" && taskList[t].value) {
                     taskValues.push(taskList[t].value);
                 }
-            }
-
+            }*/
+            var domtaskNodes = nodes[i].querySelectorAll(".dc-taskinputlist-perso input");
+             alert("iam here 2");
+             var alltaskNodes = [...domtaskNodes]; // converts a Node list to an array
+             //alert("iam here 3");
+             var tasknodes = alltaskNodes.filter(function (i) { return i.id == "" }) 
+             alert("nodelen: "+ tasknodes.length);
+             var taskValues = [];
+             for (let t = 0; t < tasknodes.length; t++) {
+                 alert("item: "+ tasknodes[t].value);
+                 if(tasknodes[t].nodeName=="INPUT" && tasknodes[t].value)
+                 {
+                     taskValues.push(tasknodes[t].value);
+                 }
+             }
             var currentProject = {
                 period: periodValue,
                 title: titleValue,
