@@ -3,7 +3,13 @@ import { ref } from "vue";
 import $ from "jquery";
 export default {
   props: {
-    projects: [],
+    projects: [{
+      period: "",
+      context: "",
+      title: "",
+      technical_env: "",
+      tasks: [],
+    }],
     maxILength: {
       type: Number,
       required: true,
@@ -126,17 +132,17 @@ $("body").on("click", "#DeleteRowTask", function () {
             <div class="row">
               <div class="col col-4">
                 <label for="">Période</label>
-                <input type="text" class="form-control" aria-label="Période" :value="proj.period" />
+                <input type="text" id="" class="form-control" aria-label="Période" :value="proj.period" />
               </div>
               <div class="col">
                 <label for="">Titre</label>
-                <input type="text" :value="proj.title" class="form-control" aria-label="Libellé du poste" />
+                <input type="text" :value="proj.title" id="" class="form-control" aria-label="Libellé du poste" />
               </div>
             </div>
             <div class="row">
               <div class="col">
                 <label for="context">Contexte</label>
-                <textarea class="form-control" id="context" v-model="proj.context"></textarea>
+                <textarea type="text" class="form-control"  placeholder="..." id="context" :value="proj.context"></textarea>
               </div>
             </div>
 
@@ -170,7 +176,7 @@ $("body").on("click", "#DeleteRowTask", function () {
               </div>
               <div class="col">
                 <label for="envt">Environnement technique</label>
-                <textarea class="form-control dc-ta-envt" v-model="proj.technical_env"></textarea>
+                <textarea class="form-control dc-ta-envt"  placeholder="..." :value="proj.technical_env"></textarea>
               </div>
              <!-- <div class="row">
                 <button class="btn" id="DeleteRow" type="button"><i class="bi bi-dash-circle-fill" style="color: red"
