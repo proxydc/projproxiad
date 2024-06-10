@@ -15,26 +15,50 @@
       </button>
     </div>
     <div class="container p-3 my-2 bg-light border border-primary">
-      <table id="usertable" class="table table-striped" style="width:100%">
-        <thead>
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Prénom</th>
-            <th scope="col">RH</th>
-            <th scope="col">Status</th>
-            <th scope="col">Tags</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <tr v-for="(acRow, index) in this.AcRows" :key="index">
-            <td class="text-start">{{ acRow.familyname }}</td>
-            <td class="text-start">{{ acRow.firstname }}</td>
-            <td class="text-start">{{ acRow.manager_name }}</td>
-            <td class="text-start">{{ acRow.status_name }}</td>
-            <td class="text-start">{{ acRow.tags }}</td>
-            <td>
-            <!--  <a class="btn btn-success mx-2" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Modifier le candidat!">
+      <!--<div class="row">
+        <div class="panel panel-primary filterable">
+          <div class="panel-heading">
+            <h3 class="panel-title">Candidats</h3>
+            <div class="pull-right">
+              <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span>
+                Filter</button>
+            </div>
+          </div>-->
+          <table id="usertable" class="table table-striped" style="width:100%">
+            <thead>
+              <tr  class="filters">
+              <!--  <th><input type="text" class="form-control" placeholder="Nom" disabled></th>
+                <th><input type="text" class="form-control" placeholder="Prénom" disabled></th>
+                <th><input type="text" class="form-control" placeholder="RH" disabled></th>
+                <th><input type="text" class="form-control" placeholder="Status" disabled></th>
+                <th><input type="text" class="form-control" placeholder="Tags" disabled></th>-->
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">RH</th>
+                <th scope="col">Status</th>
+                <th scope="col">Tags</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+         <!--   <tfoot style="display: table-header-group;">
+              <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>RH</th>
+                <th>Status</th>
+                <th>Tags</th>
+                <th>Salary</th>
+              </tr>
+            </tfoot>-->
+            <tbody class="table-group-divider">
+              <tr v-for="(acRow, index) in this.AcRows" :key="index">
+                <td class="text-start">{{ acRow.familyname }}</td>
+                <td class="text-start">{{ acRow.firstname }}</td>
+                <td class="text-start">{{ acRow.manager_name }}</td>
+                <td class="text-start">{{ acRow.status_name }}</td>
+                <td class="text-start">{{ acRow.tags }}</td>
+                <td>
+                  <!--  <a class="btn btn-success mx-2" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Modifier le candidat!">
                 Modifier
               </a>
               <b-button type="button" class="btn btn-danger mx-2" @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Supprimer le candidat!">
@@ -48,20 +72,28 @@
               <a class=" btn btn-outline-primary btn-sm mx-2" :href="'/#/dcDownload/' + acRow.id" target="_blank" v-b-tooltip.hover title="Télécharger le document!">
                 Télécharger
               </a>-->
-              <a class="bi bi-pencil-square btn btn-outline-success btn-sm" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Edit the candidat!" />
-              <b-button type="button" class="bi bi-trash3 btn btn-outline-danger btn-sm mx-1" @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Delete the candidat!" />
-              <a class="bi bi-eye-fill btn btn-outline-success btn-sm mx-1" :href="'/#/formCandidatSaisie/' + acRow.id" target="_blank" v-b-tooltip.hover title="See the candidat!" />
-              <button class="bi bi-copy btn btn-outline-success btn-sm mx-1" @click="CopyUrl(acRow.id)" v-b-tooltip.hover title="Copy the URL" />
-              <a class="bi bi-download btn btn-outline-primary btn-sm mx-1" :href="'/#/dcDownload/' + acRow.id" target="_blank" v-b-tooltip.hover title="Download the document!" />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                  <a class="bi bi-pencil-square btn btn-outline-success btn-sm" :href="'/#/editDC/' + acRow.id"
+                    v-b-tooltip.hover title="Edit the candidat!" />
+                  <b-button type="button" class="bi bi-trash3 btn btn-outline-danger btn-sm mx-1"
+                    @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Delete the candidat!" />
+                  <a class="bi bi-eye-fill btn btn-outline-success btn-sm mx-1"
+                    :href="'/#/formCandidatSaisie/' + acRow.id" target="_blank" v-b-tooltip.hover
+                    title="See the candidat!" />
+                  <button class="bi bi-copy btn btn-outline-success btn-sm mx-1" @click="CopyUrl(acRow.id)"
+                    v-b-tooltip.hover title="Copy the URL" />
+                  <a class="bi bi-download btn btn-outline-primary btn-sm mx-1" :href="'/#/dcDownload/' + acRow.id"
+                    target="_blank" v-b-tooltip.hover title="Download the document!" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+       <!-- </div>
+      </div>-->
     </div>
     <div>
     </div>
   </div>
-</template>  
+</template>
 <script>
 import Admin_Layout from "../admin/admin_Layout.vue";
 import axios from "axios";
@@ -96,7 +128,61 @@ export default {
           switch (res.status) {
             case 200:
               this.AcRows = res.data;
-             // $(document).ready(function() { $('#usertable').DataTable();});
+              $(document).ready(function () {
+               /* $('.filterable .btn-filter').click(function(){
+        var $panel = $(this).parents('.filterable'),
+        $filters = $panel.find('.filters input'),
+        $tbody = $panel.find('.table tbody');
+        if ($filters.prop('disabled') == true) {
+            $filters.prop('disabled', false);
+            $filters.first().focus();
+        } else {
+            $filters.val('').prop('disabled', true);
+            $tbody.find('.no-result').remove();
+            $tbody.find('tr').show();
+        }
+    });
+    $('.filterable .filters input').keyup(function(e){
+        /* Ignore tab key */
+        /*var code = e.keyCode || e.which;
+        if (code == '9') return;
+        /* Useful DOM data and selectors */
+       /* var $input = $(this),
+        inputContent = $input.val().toLowerCase(),
+        $panel = $input.parents('.filterable'),
+        column = $panel.find('.filters th').index($input.parents('th')),
+        $table = $panel.find('.table'),
+        $rows = $table.find('tbody tr');
+        /* Dirtiest filter function ever ;) */
+        /*var $filteredRows = $rows.filter(function(){
+            var value = $(this).find('td').eq(column).text().toLowerCase();
+            return value.indexOf(inputContent) === -1;
+        });
+        /* Clean previous no-result if exist */
+       /* $table.find('tbody .no-result').remove();
+        /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
+       /* $rows.show();
+        $filteredRows.hide();
+        /* Prepend no-result row if all rows are filtered */
+       /* if ($filteredRows.length === $rows.length) {
+            $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
+        }
+    });*/
+
+
+
+
+                $('#usertable').DataTable({
+                  "order": [],
+                  "columnDefs": [{
+                    "targets": 5,
+                    "orderable": false,
+                  }],
+                  pageLength: 5,
+                  lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
+                 /* buttons:['copy', 'csv', 'excel', 'pdf', 'print'],*/
+                });
+              });
               break;
             default:
               this.error = "Database error! Status: " + result.status + " Error: " + result.data;
@@ -165,8 +251,8 @@ export default {
     },
   },
 };
-</script>  
-  <!-- Add "scoped" attribute to limit CSS to this component only -->
+</script>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 a.btn-sm {
   margin-right: 5px;
@@ -178,5 +264,33 @@ img {
   padding: 2px;
   width: 15px;
 }
+
+tfoot input {
+  width: 100%;
+  padding: 3px;
+  box-sizing: border-box;
+}
+.filterable {
+    margin-top: 15px;
+}
+.filterable .panel-heading .pull-right {
+    margin-top: -20px;
+}
+.filterable .filters input[disabled] {
+    background-color: transparent;
+    border: none;
+    cursor: auto;
+    box-shadow: none;
+    padding: 0;
+    height: auto;
+}
+.filterable .filters input[disabled]::-webkit-input-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]::-moz-placeholder {
+    color: #333;
+}
+.filterable .filters input[disabled]:-ms-input-placeholder {
+    color: #333;
+}
 </style>
-  
