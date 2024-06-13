@@ -73,16 +73,16 @@
                 Télécharger
               </a>-->
                   <a class="bi bi-pencil-square btn btn-outline-success btn-sm" :href="'/#/editDC/' + acRow.id"
-                    v-b-tooltip.hover title="Edit the candidat!" />
+                    v-b-tooltip.hover title="Editer le candidat!" />
                   <b-button type="button" class="bi bi-trash3 btn btn-outline-danger btn-sm mx-1"
-                    @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Delete the candidat!" />
+                    @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Supprimer le candidat!" />
                   <a class="bi bi-eye-fill btn btn-outline-success btn-sm mx-1"
                     :href="'/#/formCandidatSaisie/' + acRow.id" target="_blank" v-b-tooltip.hover
-                    title="See the candidat!" />
+                    title="Voir le candidat!" />
                   <button class="bi bi-copy btn btn-outline-success btn-sm mx-1" @click="CopyUrl(acRow.id)"
-                    v-b-tooltip.hover title="Copy the URL" />
+                    v-b-tooltip.hover title="Copie l'URL" />
                   <a class="bi bi-download btn btn-outline-primary btn-sm mx-1" :href="'/#/dcDownload/' + acRow.id"
-                    target="_blank" v-b-tooltip.hover title="Download the document!" />
+                    target="_blank" v-b-tooltip.hover title="Télécharger le document!" />
                 </td>
               </tr>
             </tbody>

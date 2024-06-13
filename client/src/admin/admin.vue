@@ -111,6 +111,17 @@ export default {
           switch (res.status) {
             case 200:
               this.AcRows = res.data;
+              $(document).ready(function () {    
+                $('#admintable').DataTable({
+                  "order": [],
+                  "columnDefs": [{
+                    "targets": 4,
+                    "orderable": false,
+                  }],
+                  pageLength: 5,
+                  lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
+                });
+              });
               break;
             default:
               this.error =

@@ -1,5 +1,5 @@
 <template>
-    <h1>Hello, Welcome to Proxy DC</h1>
+    <h1>Bonjour, Bienvenue sur Proxy DC</h1>
     <nav>
       <router-link to="/login">Login</router-link>
     </nav>   

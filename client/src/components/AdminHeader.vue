@@ -1,7 +1,7 @@
 <template>
     <div class="ad_head">
-        <h1 v-if="getUser() == 'admin'">Welcome to Admin ProxyDC</h1>
-        <h1 v-else>Welcome to User ProxyDC</h1>
+        <h1 v-if="getUser() == 'admin'">Bienvenue à Admin ProxyDC</h1>
+        <h1 v-else>Bienvenue à l'utilisateur ProxyDC</h1>
     </div>
 </template>
 
