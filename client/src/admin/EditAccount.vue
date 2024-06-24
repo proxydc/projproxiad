@@ -3,17 +3,17 @@
     <div v-if="error != ''" class="alert alert-danger alert-dismissible fade show">
       <strong>{{ error }}</strong>
     </div>
-    <h1>Edit Account</h1>
+    <h1>Editer Compte</h1>
     <div class="container w-50 p-3 my-1 bg-light border border-info">
       <form class="was-validated" @submit.prevent="updateAccount">
         <div class="register">
-          <label for="lblogin">Login Name</label>
+          <label for="lblogin">Nom d'utilisateur</label>
           <input type="text" v-model="model.account.login_name" class="form-control" id="lblogin" disabled>
-          <label for="lbdisplay">Display Name</label>
-          <input type="text" id="lbdisplay" v-model="model.account.display_name" placeholder="Enter Display Name" required
+          <label for="lbdisplay">Nom</label>
+          <input type="text" id="lbdisplay" v-model="model.account.display_name" placeholder="Entrer Nom" required
             class="form-control" />
-          <label for="lbpassword">Password</label>
-          <input type="password" v-model="model.account.pass_word" placeholder="Enter Password" id="lbpassword" required
+          <label for="lbpassword">Mot de passe</label>
+          <input type="password" v-model="model.account.pass_word" placeholder="Entrer mot de passe" id="lbpassword" required
             class="form-control" />
           <div class="example ex1">
             <h5>Select Role</h5>
@@ -26,7 +26,7 @@
               <span>User</span>
             </label>
           </div>
-          <button type="submit" class="js-new">Update Account</button>
+          <button type="submit" class="js-new">MAJ Compte</button>
         </div>
       </form>
     </div>

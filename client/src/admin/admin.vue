@@ -24,7 +24,7 @@
         class="btn btn-outline-primary"
         @click="openAddAccount()"
       >
-        Nouveau account
+        Nouveau compte
       </button>
     </div>
     <div class="container p-3 my-2 bg-light border border-primary">
@@ -39,8 +39,8 @@
               <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Login</th>
-                <th scope="col">Display Name</th>
-                <th scope="col">Role Name</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Role</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -120,6 +120,17 @@ export default {
                   }],
                   pageLength: 5,
                   lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
+                   "language": {
+      "search": "Rechercher:",
+      "lengthMenu": "Montrer _MENU_ comptes per page",
+      "zeroRecords": "Aucun comptes",
+      "info": "Montrer page _PAGE_ sur _PAGES_",
+      "infoEmpty": "Aucun comptes disponibles.",
+      "infoFiltered": "(filteré de la _MAX_ totale comptes)",
+      "paginate": {
+        "next": "Suivant",
+        "previous": "Précedent"
+      },}
                 });
               });
               break;

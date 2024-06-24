@@ -12,7 +12,7 @@
         <div class="login">
           <label for="lblogin">Login</label>
           <input type="text" id="lblogin" v-model="login_name" placeholder="Entrer le login" class="form-control" required />
-          <label for="lbpw">Password</label>
+          <label for="lbpw">Mot de passe</label>
           <input type="password" id="lbpw" v-model="pass_word" placeholder="Entrer le mot de passe" class="form-control"
             required />
           <button type="submit" class="js-new">Login!</button>

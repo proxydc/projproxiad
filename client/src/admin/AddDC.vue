@@ -6,20 +6,20 @@
     <div v-if="warning != ''" class="alert alert-warning alert-dismissible fade show">
       <strong>{{ warning }}</strong>
     </div>
-    <h1>Add Candidat</h1>
+    <h1>Ajouter Candidat</h1>
     <div class="container w-50 p-3 my-1 bg-light border border-info">
       <form class="was-validated" @submit.prevent="addDC">
         <div class="register">
           <label for="lbnom">Nom</label>
-          <input type="text" v-model="model.dc.familyname" placeholder="Enter Family Name" id="lbnom" required
+          <input type="text" v-model="model.dc.familyname" placeholder="Entrer Nom" id="lbnom" required
             class="form-control" />
           <label for="lbprenom">Prénom</label>
-          <input type="text" v-model="model.dc.firstname" placeholder="Enter First Name" id="lbprenom" required
+          <input type="text" v-model="model.dc.firstname" placeholder="Entrer Prénom" id="lbprenom" required
             class="form-control" />
           <label for="lbemail">Email</label>
-          <input type="email" v-model="model.dc.email" placeholder="Enter Email" id="lbemail" class="form-control"
+          <input type="email" v-model="model.dc.email" placeholder="Entrer Email" id="lbemail" class="form-control"
             required />
-          <button type="submit" class="js-new">Add Candidat</button>
+          <button type="submit" class="js-new">Ajouter Candidat</button>
           <br /><br />
         </div>
       </form>

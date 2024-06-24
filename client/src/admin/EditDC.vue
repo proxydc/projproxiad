@@ -3,24 +3,24 @@
     <div v-if="error != ''" class="alert alert-danger alert-dismissible fade show">
       <strong>{{ error }}</strong>
     </div>
-    <h1>Edit Candidat</h1>
+    <h1>Editer Candidat</h1>
     <div class="container w-50 p-3 my-1 bg-light border border-info">
       <form class="was-validated" @submit.prevent="updateCandidat">
         <div class="register">
           <label for="lbfamilyname">Nom</label>
           <input type="text" v-model="model.candidat.familyname" class="form-control" id="lbfamilyname" required />
           <label for="lbfirstname">Prénom</label>
-          <input type="text" id="lbfirstname" v-model="model.candidat.firstname" placeholder="Enter First Name" required
+          <input type="text" id="lbfirstname" v-model="model.candidat.firstname" placeholder="Entrer Prénom" required
             class="form-control" />
           <label for="lbemail">Email</label>
-          <input type="email" v-model="model.candidat.email" placeholder="Enter Email" id="lbemail" required
+          <input type="email" v-model="model.candidat.email" placeholder="Entrer Email" id="lbemail" required
             class="form-control" />
           <label for="lbposte">Poste</label>
-          <input type="text" id="lbposte" v-model="model.candidat.poste" placeholder="Enter poste" class="form-control" />
+          <input type="text" id="lbposte" v-model="model.candidat.poste" placeholder="Entrer poste" class="form-control" />
           <label for="lbexps">Nb.Exps</label>
-          <input type="text" id="lbexps" v-model="model.candidat.nbexps" placeholder="Enter nb exps" class="form-control" />
+          <input type="text" id="lbexps" v-model="model.candidat.nbexps" placeholder="Entrer nb exps" class="form-control" />
           <label for="lbtags">Tags</label>
-          <input type="text" id="lbtags" v-model="model.candidat.tags" placeholder="Enter tags" class="form-control" />
+          <input type="text" id="lbtags" v-model="model.candidat.tags" placeholder="Entrer tags" class="form-control" />
           <label for="lbstatus">Status:</label>
           <div style="overflow:hidden;">
             <select name="name" class="selectpicker show-tick" v-model="model.candidat.dc_status">
@@ -29,7 +29,7 @@
           </div>
           <br />
           <div style="overflow:hidden;">
-            <button type="submit" class="js-new">Update Candidat</button>
+            <button type="submit" class="js-new">MAJ Candidat</button>
             <br /><br />
           </div>
         </div>

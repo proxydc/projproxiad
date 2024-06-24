@@ -181,6 +181,17 @@ export default {
                   pageLength: 5,
                   lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
                  /* buttons:['copy', 'csv', 'excel', 'pdf', 'print'],*/
+                 "language": {
+      "search": "Rechercher:",
+      "lengthMenu": "Montrer _MENU_ candidats per page",
+      "zeroRecords": "Aucun candidats",
+      "info": "Montrer page _PAGE_ sur _PAGES_",
+      "infoEmpty": "Aucun candidats disponibles.",
+      "infoFiltered": "(filteré de la _MAX_ totale candidats)",
+      "paginate": {
+        "next": "Suivant",
+        "previous": "Précedent"
+      },}
                 });
               });
               break;

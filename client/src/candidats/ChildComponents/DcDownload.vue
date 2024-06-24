@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <div class="example ex1">
-            <h5>File Name</h5>
+            <h5>Nom de fichier</h5>
             <label class="radio red">
               <input type="radio" v-model="filename" value="1" name="group1" />
               <span>Complet</span>
@@ -12,7 +12,7 @@
             </label>
           </div>
     <button class="btn" v-on:click="createDoc(documentId)">
-      DOWNLOAD DOCUMENT
+      TELECHARGER DOCUMENT
     </button>
   </div>
 </template>
