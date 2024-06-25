@@ -122,11 +122,11 @@ export default {
                   lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
                    "language": {
       "search": "Rechercher:",
-      "lengthMenu": "Montrer _MENU_ comptes per page",
+      "lengthMenu": "_MENU_ lignes par page",
       "zeroRecords": "Aucun comptes",
-      "info": "Montrer page _PAGE_ sur _PAGES_",
+      "info": "Page _PAGE_ sur _PAGES_",
       "infoEmpty": "Aucun comptes disponibles.",
-      "infoFiltered": "(filteré de la _MAX_ totale comptes)",
+      "infoFiltered": "",//"(filteré de la _MAX_ totale comptes)",
       "paginate": {
         "next": "Suivant",
         "previous": "Précedent"
