@@ -150,7 +150,8 @@ export default {
         "next": "Suivant",
         "previous": "Précedent"
       },},
-      layout: {
+      buttons:['copy', 'csv', 'excel', 'pdf', 'print'],
+      /*layout: {
         topStart: {
             buttons: [
                 {
@@ -159,7 +160,7 @@ export default {
                 }
             ]
         }
-    }
+    }*/
                 });
                 
               });
