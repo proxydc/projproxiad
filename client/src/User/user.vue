@@ -37,6 +37,7 @@
                 <th scope="col">RH</th>
                 <th scope="col">Status</th>
                 <th scope="col">Tags</th>
+                <th scope="col">Date de création</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -57,6 +58,7 @@
                 <td class="text-start">{{ acRow.manager_name }}</td>
                 <td class="text-start">{{ acRow.status_name }}</td>
                 <td class="text-start">{{ acRow.tags }}</td>
+                <td class="text-start">{{ acRow.creation_date }}</td>
                 <td>
                   <!--  <a class="btn btn-success mx-2" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Modifier le candidat!">
                 Modifier
@@ -99,6 +101,17 @@ import Admin_Layout from "../admin/admin_Layout.vue";
 import axios from "axios";
 import urldc from "../_helpers/urllist.js";
 import $ from "jquery";
+
+/*import pdfFonts from '../assets/vfs_fonts.js';
+import JSZip from 'jszip';
+import pdfMake from 'pdfmake';
+import 'datatables.net-buttons-bs5';
+//import 'datatables.net-buttons/js/buttons.colVis.mjs';
+//import 'datatables.net-buttons/js/buttons.html5.mjs';
+//import 'datatables.net-buttons/js/buttons.print.mjs';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+window.JSZip = JSZip;*/
 export default {
   name: "user",
   components: { Admin_Layout },
@@ -136,31 +149,45 @@ export default {
                     "targets": 5,
                     "orderable": false,
                   }],
+                  title:'',
                   pageLength: 5,
                   lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
                  /* buttons:['copy', 'csv', 'excel', 'pdf', 'print'],*/
                  "language": {
       "search": "Rechercher:",
-      "lengthMenu": "_MENU_ lignes par page",
+      "lengthMenu": "Lignes par page _MENU_",
       "zeroRecords": "Aucun candidats",
       "info": "Page _PAGE_ sur _PAGES_",
       "infoEmpty": "Aucun candidats disponibles.",
       "infoFiltered": "",//"(filteré de la _MAX_ totale candidats)",
       "paginate": {
         "next": "Suivant",
-        "previous": "Précedent"
+        "previous": "Précedent",
+        "title": "Candidats"
       },},
-      buttons:['copy', 'csv', 'excel', 'pdf', 'print'],
-      /*layout: {
-        topStart: {
-            buttons: [
-                {
-                    extend: 'pdfHtml5',
-                    download: 'open'
-                }
-            ]
+      layout: 
+      {
+        top: {
+         // buttons:['excel','spacer', 'pdf','spacer', 'print'],
+            buttons: 
+            [
+              {
+                extend: 'excel',
+                title: 'Liste des Candidats', 
+              }, 
+              'spacer', 
+              {
+                extend: 'pdf',
+                title: 'Liste des Candidats',
+              },
+              'spacer', 
+              {
+                extend: 'print',
+                title: 'Liste des Candidats',
+              },
+            ],   
         }
-    }*/
+      }
                 });
                 
               });

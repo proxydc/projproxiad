@@ -58,13 +58,12 @@ export default {
             );
             localStorage.setItem("manager_id", resp.manager_id);
             if (resp.role_id == 1) {
-              localStorage.setItem("useraccount", "admin");
-              this.$router.push({ name: "admin" });
+              localStorage.setItem("useraccount", "admin");             
             } else {
               localStorage.setItem("useraccount", "user");
               localStorage.getItem("useraccount");//to save in cookies
-              this.$router.push({ name: "user" });
             };
+            this.$router.push({ name: "user" });
             break;
           case 202:
             this.warning = result.data;

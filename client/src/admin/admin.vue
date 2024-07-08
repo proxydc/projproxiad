@@ -83,6 +83,18 @@ import axios from "axios";
 import Admin_Layout from "../admin/admin_Layout.vue";
 import urlacc from "../_helpers/urllist.js";
 import $ from "jquery";
+
+/*import pdfFonts from '../assets/vfs_fonts.js';
+import JSZip from 'jszip';
+import pdfMake from 'pdfmake';
+//import 'datatables.net-buttons-bs5';
+//import 'datatables.net-buttons/js/buttons.html5.mjs';
+//import 'datatables.net-buttons/js/buttons.print.mjs';
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+window.JSZip = JSZip;*/
+
+
 export default {
   name: "admin",
   components: { Admin_Layout },
@@ -122,7 +134,7 @@ export default {
                   lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
                    "language": {
       "search": "Rechercher:",
-      "lengthMenu": "_MENU_ lignes par page",
+      "lengthMenu": "Lignes par page _MENU_",
       "zeroRecords": "Aucun comptes",
       "info": "Page _PAGE_ sur _PAGES_",
       "infoEmpty": "Aucun comptes disponibles.",
@@ -130,7 +142,30 @@ export default {
       "paginate": {
         "next": "Suivant",
         "previous": "Précedent"
-      },}
+      },},
+
+      layout: {
+        top: {
+                // buttons:['excel','spacer', 'pdf','spacer', 'print'],
+                buttons: 
+              [
+                {
+                  extend: 'excel', 
+                  title: 'Liste des Utilisateurs', 
+                }, 
+                'spacer', 
+                {
+                  extend: 'pdf', 
+                  title: 'Liste des Utilisateurs', 
+                },
+                'spacer', 
+                {
+                  extend: 'print', 
+                  title: 'Liste des Utilisateurs', 
+                 },
+              ],  
+        }
+    }
                 });
               });
               break;
