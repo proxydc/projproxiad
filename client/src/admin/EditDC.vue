@@ -19,11 +19,21 @@
           <input type="text" id="lbposte" v-model="model.candidat.poste" placeholder="Entrer poste" class="form-control" />
           <label for="lbexps">Nb.Exps</label>
           <input type="text" id="lbexps" v-model="model.candidat.nbexps" placeholder="Entrer nb exps" class="form-control" />
+          <div class="multi_select_box">
+          <label for="lbrhs">RH</label>
+        <!--  <input type="text" id="lbrhs" v-model="model.candidat.manager_id" placeholder="Entrer nb exps" class="form-control" />-->
+            <select id="slManager" class="multi_select w-100" multiple data-selected-text-format=" count > 2">
+              <option v-for="(rhdc,index) in DcManagerList" :value="rhdc.Id" :key="index">
+                {{ rhdc.display_name }}
+              </option>
+            </select>
+          </div>
           <label for="lbtags">Tags</label>
           <input type="text" id="lbtags" v-model="model.candidat.tags" placeholder="Entrer tags" class="form-control" />
-          <label for="lbstatus">Status:</label>
-          <div style="overflow:hidden;">
-            <select name="name" class="selectpicker show-tick" v-model="model.candidat.dc_status">
+         
+          <div class="multi_select_box">
+            <label for="lbstatus">Status:</label>
+            <select name="name" v-model="model.candidat.dc_status">
               <option v-for="(stadc,index) in DcStatusList" :value="stadc.value" :key="index">{{ stadc.text }}</option>
             </select>
           </div>
@@ -43,6 +53,15 @@ import axios from "axios";
 import urldc from "../_helpers/urllist.js";
 import $ from "jquery";
 import DcStatusEnum from "../_helpers/enum-dcStatus";
+
+import "../assets/select/css/bootstrap-select.min.css";
+import "../assets/select/js/bootstrap-select.min.js";
+//import "../assets/select/js/jquery-3.5.0.min.js";
+//import "../assets/select/js/bootstrap.bundle";
+//import "../assets/select/css/bootstrap.css"
+
+
+
 export default {
   name: "EditCandidat",
   data() {
@@ -55,6 +74,7 @@ export default {
         { value: 3, text: "Finalisé" },
         { value: 4, text: "Terminé" },
       ],
+      DcManagerList: [],
       model: {
         candidat: {
           id: { type: String, required: true },
@@ -71,11 +91,89 @@ export default {
     };
   },
   mounted() {
+    /* const chBoxes = 
+            document.querySelectorAll('.dropdown-menu input[type="checkbox"]'); 
+        const dpBtn =  
+            document.getElementById('multiSelectDropdown'); 
+        let mySelectedListItems = []; 
+  
+        function handleCB() { 
+            mySelectedListItems = []; 
+            let mySelectedListItemsText = ''; 
+  
+            chBoxes.forEach((checkbox) => { 
+                if (checkbox.checked) { 
+                    mySelectedListItems.push(checkbox.value); 
+                    mySelectedListItemsText += checkbox.value + ', '; 
+                } 
+            }); 
+  
+            dpBtn.innerText = 
+                mySelectedListItems.length > 0 
+                    ? mySelectedListItemsText.slice(0, -2) : 'Select'; 
+        } 
+  
+        chBoxes.forEach((checkbox) => { 
+            checkbox.addEventListener('change', handleCB); 
+        });*/   
+
+    this.getLogins();
+    $('#slManager').change(function () {
+  this.selectedManager = $('#slManager').val();
+        //alert("test"+this.selectedManager );
+    });  
     document.getElementById("lbfamilyname").focus();
     this.getCandidatData(this.$route.params.id);   
   },
 
   methods: {
+    getLogins() {
+      try {
+        const url = urldc.getLoginUrl();
+        axios.get(url).then((res) => {
+          console.log(res.data);
+          switch (res.status) {
+            case 200:
+              this.DcManagerList = res.data; 
+              alert("her: "+this.DcManagerList[0].display_name);
+              let v1='Alex';
+              let v2='Nono';
+              let tesd = "Alex,Nono";
+              tesd = this.getSelectedManager();
+              alert ("tt: "+ tesd);
+             $(function () {
+   // $('select').selectpicker();
+   var options = []; //options.push(v1); options.push(v2); 
+   var selectedOptions = tesd.split(",");
+   for(var i in selectedOptions) {
+    alert("val: "+ selectedOptions[i]);
+    options.push(selectedOptions[i]);   
+}
+   
+    //$('.selectpicker').selectpicker('val', options);
+    //$('#slManager').val([v1, v2]);
+    //$('#slManager').val([v1]);
+    //$('#slManager').val([options]);
+    $('#slManager').selectpicker('val', options);
+});
+              break;
+            default:
+              this.error =
+                "Database error! Status: " +
+                result.status +
+                " Error: " +
+                result.data;
+              break;
+          }
+        });
+      } catch (err) {
+        this.error = err;
+      }
+    },
+    getSelectedManager() {
+      let res = this.model.candidat.manager_id;
+        return "";
+    },
     getCandidatData(dcId) {
       const url = urldc.getDcUrl(dcId);
       axios
@@ -124,3 +222,59 @@ export default {
   },
 };
 </script>
+<style scoped>
+/*.bootstrap-select .bs-ok-default::after {
+    width: 0.3em;
+    height: 0.6em;
+    border-width: 0 0.1em 0.1em 0;
+    transform: rotate(45deg) translateY(0.5rem);
+}
+
+.btn.dropdown-toggle:focus {
+    outline: none !important;
+}
+
+.checkbox-menu li label {
+    display: block;
+    clear: both;
+    font-weight: bold;
+    line-height: 0.05;/*1.42857143;*/
+   /* color: #333;
+    white-space: nowrap;
+    margin:0;
+    transition: background-color .4s ease;
+}
+.checkbox-menu li input {
+    margin: 0px 0px;
+    top: 0px;
+    position: relative;
+}
+
+.checkbox-menu li.active label {
+    background-color: #cbcbff;
+    font-weight:bold;
+}
+
+.checkbox-menu li label:hover,
+.checkbox-menu li label:focus {
+    background-color: #f5f5f5;
+}
+
+.checkbox-menu li.active label:hover,
+.checkbox-menu li.active label:focus {
+    background-color: #b8b8ff;
+}*/
+.multi_select_box{
+  width: 300px;
+  margin: 20px auto;
+
+}
+.multi_select_box select{
+  width: 100%
+}
+.multi_select_box button{
+  background-color:darkblue !important ;
+  color: #fff !important;
+  padding: 15px 25px;
+}
+</style>

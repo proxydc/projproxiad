@@ -10,7 +10,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 
 import './assets/css/buttons.dataTables.css';
 import './assets/css/dataTables.dataTables.css';
-import './assets/css/bootstrap.min.css';
+//import './assets/css/bootstrap.min.css';
 //import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
 import 'datatables.net-buttons/js/buttons.print.mjs';
