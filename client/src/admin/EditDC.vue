@@ -21,8 +21,8 @@
           <input type="text" id="lbexps" v-model="model.candidat.nbexps" placeholder="Entrer nb exps" class="form-control" />
           <div class="multi_select_box">
           <label for="lbrhs">RH</label>
-        <!--  <input type="text" id="lbrhs" v-model="model.candidat.manager_id" placeholder="Entrer nb exps" class="form-control" />-->
-            <select id="slManager" class="multi_select w-100" multiple data-selected-text-format=" count > 2">
+        <!--  <input type="text" id="lbrhs" v-model="model.candidat.manager_id" placeholder="Entrer nb exps" class="form-control" />v-model="model.candidat.ref_managers"-->
+            <select id="slManager" class="multi_select w-100"   multiple data-selected-text-format=" count > 2">
               <option v-for="(rhdc,index) in DcManagerList" :value="rhdc.Id" :key="index">
                 {{ rhdc.display_name }}
               </option>
@@ -39,7 +39,7 @@
           </div>
           <br />
           <div style="overflow:hidden;">
-            <button type="submit" class="js-new">MAJ Candidat</button>
+            <button type="submit" id="submit" class="js-new">MAJ Candidat</button>
             <br /><br />
           </div>
         </div>
@@ -85,49 +85,20 @@ export default {
           nbexps: { type: Number, required: true },
           dc_status: { type: Number },
           status_name: { type: String },
+          ref_managers:{ type: String },
           tags: { type: String },
+          
         },
       },
     };
   },
   mounted() {
-    /* const chBoxes = 
-            document.querySelectorAll('.dropdown-menu input[type="checkbox"]'); 
-        const dpBtn =  
-            document.getElementById('multiSelectDropdown'); 
-        let mySelectedListItems = []; 
-  
-        function handleCB() { 
-            mySelectedListItems = []; 
-            let mySelectedListItemsText = ''; 
-  
-            chBoxes.forEach((checkbox) => { 
-                if (checkbox.checked) { 
-                    mySelectedListItems.push(checkbox.value); 
-                    mySelectedListItemsText += checkbox.value + ', '; 
-                } 
-            }); 
-  
-            dpBtn.innerText = 
-                mySelectedListItems.length > 0 
-                    ? mySelectedListItemsText.slice(0, -2) : 'Select'; 
-        } 
-  
-        chBoxes.forEach((checkbox) => { 
-            checkbox.addEventListener('change', handleCB); 
-        });*/   
-
-    this.getLogins();
-    $('#slManager').change(function () {
-  this.selectedManager = $('#slManager').val();
-        //alert("test"+this.selectedManager );
-    });  
     document.getElementById("lbfamilyname").focus();
-    this.getCandidatData(this.$route.params.id);   
+    this.getCandidatData(this.$route.params.id);      
   },
 
   methods: {
-    getLogins() {
+    getLogins(mg) {
       try {
         const url = urldc.getLoginUrl();
         axios.get(url).then((res) => {
@@ -135,27 +106,16 @@ export default {
           switch (res.status) {
             case 200:
               this.DcManagerList = res.data; 
-              alert("her: "+this.DcManagerList[0].display_name);
-              let v1='Alex';
-              let v2='Nono';
-              let tesd = "Alex,Nono";
-              tesd = this.getSelectedManager();
+              let tesd = mg;
               alert ("tt: "+ tesd);
-             $(function () {
-   // $('select').selectpicker();
-   var options = []; //options.push(v1); options.push(v2); 
-   var selectedOptions = tesd.split(",");
-   for(var i in selectedOptions) {
-    alert("val: "+ selectedOptions[i]);
-    options.push(selectedOptions[i]);   
-}
-   
-    //$('.selectpicker').selectpicker('val', options);
-    //$('#slManager').val([v1, v2]);
-    //$('#slManager').val([v1]);
-    //$('#slManager').val([options]);
-    $('#slManager').selectpicker('val', options);
-});
+              $(function () {
+                      var options = []; 
+                      var selectedOptions = tesd.split(",");
+                      for(var i in selectedOptions) {
+                        options.push(selectedOptions[i]);   
+                    }
+                        $('#slManager').selectpicker('val', options);
+                    });
               break;
             default:
               this.error =
@@ -171,8 +131,14 @@ export default {
       }
     },
     getSelectedManager() {
-      let res = this.model.candidat.manager_id;
-        return "";
+      var selectedvalues= "";
+      for(var option of document.getElementById("slManager").options)
+      {
+        if(option.selected){
+          selectedvalues+=option.value+",";
+        }
+      }
+      return selectedvalues;
     },
     getCandidatData(dcId) {
       const url = urldc.getDcUrl(dcId);
@@ -181,7 +147,10 @@ export default {
         .then((res) => {
           console.log(res.data);
           if (res.status == 200)
-            this.model.candidat = res.data[0];
+           {
+            this.model.candidat = res.data[0];   
+            this.getLogins(this.model.candidat.ref_managers);
+           } 
           if (res.status == 203) {
             this.error = res.data;
           }
@@ -191,10 +160,12 @@ export default {
           }
         });
     },
+    
 
     async updateCandidat() {
       try {
-        const url = urldc.getDcAdminUrl(this.model.candidat.id);
+        const url = urldc.getDcAdminUrl(this.model.candidat.id);   
+        this.model.candidat.ref_managers = this.getSelectedManager();
         let result = await axios.put(url, {
           familyname: this.model.candidat.familyname,
           firstname: this.model.candidat.firstname,
@@ -203,6 +174,7 @@ export default {
           tags: this.model.candidat.tags,
           poste: this.model.candidat.poste,
           nbexps: this.model.candidat.nbexps,
+          ref_managers: this.model.candidat.ref_managers,
         });
         console.log(result);
         switch (result.status) {
@@ -223,47 +195,6 @@ export default {
 };
 </script>
 <style scoped>
-/*.bootstrap-select .bs-ok-default::after {
-    width: 0.3em;
-    height: 0.6em;
-    border-width: 0 0.1em 0.1em 0;
-    transform: rotate(45deg) translateY(0.5rem);
-}
-
-.btn.dropdown-toggle:focus {
-    outline: none !important;
-}
-
-.checkbox-menu li label {
-    display: block;
-    clear: both;
-    font-weight: bold;
-    line-height: 0.05;/*1.42857143;*/
-   /* color: #333;
-    white-space: nowrap;
-    margin:0;
-    transition: background-color .4s ease;
-}
-.checkbox-menu li input {
-    margin: 0px 0px;
-    top: 0px;
-    position: relative;
-}
-
-.checkbox-menu li.active label {
-    background-color: #cbcbff;
-    font-weight:bold;
-}
-
-.checkbox-menu li label:hover,
-.checkbox-menu li label:focus {
-    background-color: #f5f5f5;
-}
-
-.checkbox-menu li.active label:hover,
-.checkbox-menu li.active label:focus {
-    background-color: #b8b8ff;
-}*/
 .multi_select_box{
   width: 300px;
   margin: 20px auto;

@@ -56,7 +56,8 @@ export default {
               "token",
               "hdsfhqishiofhiqsdhfhdksqhfklmqjdmsfjildjsfioj7467d687dfsgnjklfhnglk46396fdgnlkjndflkg646346drg,fkldjg"
             );
-            localStorage.setItem("manager_id", resp.manager_id);
+            localStorage.setItem("manager_id", resp.id);
+            localStorage.setItem("manager_ref", resp.display_name);
             if (resp.role_id == 1) {
               localStorage.setItem("useraccount", "admin");             
             } else {

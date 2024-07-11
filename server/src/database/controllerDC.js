@@ -17,7 +17,8 @@ const getDCs = (req, res) => {
 };
 //get-200
 const getDCsByManagerID = (req, res) => {
-    const id = req.params.id;
+    const id = "%" + req.params.id + "%";
+    console.log("id: " + id);
     pool.query(queries.getDCsByManagerID, [id], (error, results) => {
         try {
             if (error) throw error;
@@ -86,7 +87,7 @@ const getAllDcStatus = (req, res) => {
 
 //post 201
 const addDC = (req, res) => {
-    const { familyname, firstname, email, manager_id } = req.body;
+    const { familyname, firstname, email, manager_id, ref_managers } = req.body;
     const creation_date = new Date().toLocaleString();
     const modification_date = new Date().toLocaleString();
     try {
@@ -100,7 +101,7 @@ const addDC = (req, res) => {
                     //add DC to db
                     let initialDocument = docTemplate.GetDocTemp();
                     pool.query(
-                        queries.addDC, [familyname, firstname, email, dcStatus, initialDocument, manager_id, creation_date, modification_date],
+                        queries.addDC, [familyname, firstname, email, dcStatus, initialDocument, manager_id, ref_managers, creation_date, modification_date],
                         (error, results) => {
                             try {
                                 if (error) throw error;
@@ -180,7 +181,7 @@ const updateDCDoc = (req, res) => {
 const updateDCByAdmin = (req, res) => {
     try {
         const id = req.params.id;
-        const { familyname, firstname, email, dc_status, tags, nbexps, poste } = req.body;
+        const { familyname, firstname, email, dc_status, tags, nbexps, poste, ref_managers } = req.body;
         const modification_date = new Date().toLocaleString();
         pool.query(queries.getDCById, [id], (error, results) => {
             const noDCFound = !results.rows.length;
@@ -188,7 +189,7 @@ const updateDCByAdmin = (req, res) => {
                 res.status(202).send("Candidat does not exist in the database");
             } else {
                 pool.query(
-                    queries.updateDCByAdmin, [id, familyname, firstname, email, dc_status, tags, nbexps, poste, modification_date],
+                    queries.updateDCByAdmin, [id, familyname, firstname, email, dc_status, tags, nbexps, poste, modification_date, ref_managers],
                     (error, results) => {
                         try {
                             if (error) throw error;

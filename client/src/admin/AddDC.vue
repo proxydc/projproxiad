@@ -61,6 +61,7 @@ export default {
           firstname: this.model.dc.firstname,
           email: this.model.dc.email,
           manager_id: parseInt(localStorage.getItem("manager_id")),
+          ref_managers: localStorage.getItem("manager_ref")
         });
         console.log(result);
         switch (result.status) {
