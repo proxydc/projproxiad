@@ -30,6 +30,35 @@ const getDCsByManagerID = (req, res) => {
     });
 };
 //get-200
+const getDCsParDate = (req, res) => {
+    const { stcreationdate, encreationdate } = req.body;
+    pool.query(queries.getDCsParDate, [stcreationdate, encreationdate], (error, results) => {
+        try {
+            console.log(queries.getDCsParDate);
+            if (error) throw error;
+            res.status(200).json(results.rows);
+        } catch (err) {
+            console.log("catch: " + err);
+            res.status(203).json({ error: "Error Database! " + err });
+        }
+    });
+};
+//get-200
+const getDCsByManagerIDParDate = (req, res) => {
+    const id = "%" + req.params.id + "%";
+    console.log("id: " + id);
+    const { stcreationdate, encreationdate } = req.body;
+    pool.query(queries.getDCsByManagerIDParDate, [id, stcreationdate, encreationdate], (error, results) => {
+        try {
+            if (error) throw error;
+            res.status(200).json(results.rows);
+        } catch (err) {
+            console.log("catch: " + err);
+            res.status(203).json({ error: "Error Database! " + err });
+        }
+    });
+};
+//get-200
 const getDCById = (req, res) => {
     const id = req.params.id;
     pool.query(queries.getDCById, [id], (error, results) => {
@@ -219,4 +248,6 @@ module.exports = {
     updateDCByAdmin,
     deleteDCById,
     getAllDcStatus,
+    getDCsByManagerIDParDate,
+    getDCsParDate,
 };

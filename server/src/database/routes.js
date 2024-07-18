@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const controller = require("./controllerAccount");
 const controllerDC = require("./controllerDC");
-const router =  Router();
+const router = Router();
 router.post("/account", controller.getAuthentification);
 router.get("/account", controller.getAccounts);
 router.post("/account/add", controller.addAccount);
@@ -22,5 +22,8 @@ router.put("/dcAdmin/:id", controllerDC.updateDCByAdmin);
 router.delete("/dc/:id", controllerDC.deleteDCById);
 
 router.get("/dc-status", controllerDC.getAllDcStatus);
+
+router.post("/dcParDate", controllerDC.getDCsParDate);
+router.post("/dcByManagerParDate/:id", controllerDC.getDCsByManagerIDParDate);
 
 module.exports = router;

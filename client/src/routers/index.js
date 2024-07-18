@@ -11,6 +11,7 @@ import { authGuard } from "../_helpers/auth-guard";
 import admin from "../admin/admin.vue";
 import AdminLayout from "../admin/admin_Layout.vue";
 import user from "../User/user.vue";
+import userRecherche from "../User/userRecherche.vue";
 import FormCandidatSaisie from "../candidats/FormCanSaisie.vue";
 import DcDownload from "../candidats/ChildComponents/DcDownload.vue";
 const routes = [{
@@ -26,6 +27,7 @@ const routes = [{
             { name: "EditDC", component: EditDC, path: "/editDC/:id", beforeEnter: authGuard, },
             { name: "FormCandidatSaisie", component: FormCandidatSaisie, path: "/formCandidatSaisie/:id", },
             { name: "DcDownload", component: DcDownload, path: "/dcDownload/:id", beforeEnter: authGuard, },
+            { name: "userRecherche", component: userRecherche, path: "/userRecherche", beforeEnter: authGuard, },
         ]
     },
     {

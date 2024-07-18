@@ -13,7 +13,39 @@
       <button type="button" class="btn btn-outline-primary" @click="openAddDC()">
         Nouveau candidat
       </button>
+      <button type="button" class="btn btn-outline-primary" @click="openRechercheAvances()"> 
+        Recherches Avances
+      </button>
     </div>
+
+ <!--   <div class="container w-50 p-1 bg-light border border-success">
+      <a href="/#/userRecherche">Recherches</a>
+      <br/>
+    <a href="#demo" data-toggle="collapse">Recherches Avances</a>
+    <div id="demo" class="collapse hide"> v-bind:class="getClass()">>-->
+    <!--  <div class="row">
+              <div class="col col-5">
+                <label for="">Début</label>
+                <input type="date" v-model="stcreationdate" id="" class="form-control" aria-label="Date de début" />
+              </div>
+              <div class="col col-5">
+                <label for="">Fin</label>
+                <input type="date" v-model="encreationdate" id="" class="form-control" aria-label="Date de fin" />
+              </div>
+              <div class="col col-2">
+                <br/>
+                <button  v-if="btnOK == true" type="button" class="btn btn-outline-primary" @click="getDcsParDate()">
+                  OK
+                </button>          
+                <button v-else type="button" class="btn btn-outline-primary" @click="Clear()">
+                  Clear
+                </button>             
+              </div>
+    </div>
+  </div>
+</div>-->
+
+
     <div class="container p-3 my-2 bg-light border border-primary">
       <!--<div class="row">
         <div class="panel panel-primary filterable">
@@ -34,9 +66,10 @@
                 <th><input type="text" class="form-control" placeholder="Tags" disabled></th>-->
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
-                <th scope="col">RH</th>
+                <th scope="col">Créator</th>
                 <th scope="col">Status</th>
                 <th scope="col">Tags</th>
+                <th scope="col">RH</th>
                 <th scope="col">Date de création</th>
                 <th scope="col">Actions</th>
               </tr>
@@ -58,7 +91,13 @@
                 <td class="text-start">{{ acRow.manager_name }}</td>
                 <td class="text-start">{{ acRow.status_name }}</td>
                 <td class="text-start">{{ acRow.tags }}</td>
-                <td class="text-start">{{ acRow.creation_date }}</td>
+                <td class="text-start">{{ acRow.ref_managers }}</td>
+                
+                  <!--  <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString() }}</td>
+                     <td class="text-start">{{ acRow.creation_date }}</td>
+            <td class="text-start">{{ new Date(new Date(acRow.creation_date).setDate(new Date(acRow.creation_date).getDate())).toLocaleDateString()}}</td>
+            <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString()}}</td>-->
+            <td class="text-start">{{ acRow.creation_date }}</td>
                 <td>
                   <!--  <a class="btn btn-success mx-2" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Modifier le candidat!">
                 Modifier
@@ -76,8 +115,10 @@
               </a>-->
                   <a class="bi bi-pencil-square btn btn-outline-success btn-sm" :href="'/#/editDC/' + acRow.id"
                     v-b-tooltip.hover title="Editer le candidat!" />
-                  <b-button type="button" class="bi bi-trash3 btn btn-outline-danger btn-sm mx-1"
+
+                  <b-button v-if="getUser() == 'admin'" type="button" class="bi bi-trash3 btn btn-outline-danger btn-sm mx-1"
                     @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Supprimer le candidat!" />
+
                   <a class="bi bi-eye-fill btn btn-outline-success btn-sm mx-1"
                     :href="'/#/formCandidatSaisie/' + acRow.id" target="_blank" v-b-tooltip.hover
                     title="Voir le candidat!" />
@@ -96,7 +137,7 @@
     </div>
   </div>
 </template>
-<script>
+<script defer>
 import Admin_Layout from "../admin/admin_Layout.vue";
 import axios from "axios";
 import urldc from "../_helpers/urllist.js";
@@ -121,17 +162,80 @@ export default {
       error: "",
       warning: "",
       success: "",
+      stcreationdate:{type: Date},
+      encreationdate:{type: Date},
+      btnOK: true,  
     };
   },
   mounted() {
     try {
       this.getDCs();
       console.log("data: " + this.AcRows);
+      this.stcreationdate = '2000-01-01';
+      this.encreationdate = new Date().toJSON().slice(0,10);
+      //localStorage.setItem("RD", "");
     } catch (err) {
       this.error = err.message;
     }
   },
   methods: {
+    getUser(){
+            return localStorage.getItem('useraccount')
+        },
+    getClass()
+    {
+      if( localStorage.getItem("RD")=="RD" || localStorage.getItem("LP")=="LP")
+        {
+          localStorage.setItem("RD", "");
+          localStorage.setItem("LP", "LP");
+          return "collapse show";
+        }
+      return "collapse hide";
+    },
+    Clear()
+    {      
+      window.location.reload();
+    },
+   async getDcsParDate(){
+      try {
+        localStorage.setItem("RD", "RD");
+        const url = urldc.getDcsUrlParDate();
+       // alert("url: "+url);
+       // alert("stcreation1: "+ this.stcreationdate);
+       //this.Clear();
+        let result = await axios.post(url, {
+          stcreationdate: this.stcreationdate,
+          encreationdate: this.encreationdate,
+        });//.then((res) => {
+          console.log(result.data);
+          switch (result.status) {
+            case 200:
+              //alert("stcreation2: "+ this.stcreationdate);
+             // this.AcRows=[];
+              //if(result.data[0]!=null)
+                //{alert("total1: "+result.data[0].id);
+             this.AcRows = result.data;
+             //this.AcRows = result.data;
+            
+          /*}
+          else{
+            alert("iam here");
+            this.AcRows = [];
+          }*/
+
+             this.error="";
+             this.btnOK=false;
+              break;
+            default:
+              this.error = "Database error! Status: " + result.status + " Error: " + result.data;
+              break;
+          }
+        //});
+      }
+      catch (err) {
+        this.error = err;
+      }
+    },
     getDCs() {
       try {
         const url = urldc.getDcsUrl();
@@ -148,10 +252,13 @@ export default {
                   "columnDefs": [{
                     "targets": 5,
                     "orderable": false,
+                    //"render":"datetime('d MMM yyyy', 'MMM d, yy', 'en')",//'DD/MM/YYYY',
+                    //"render":  $('#usertable').render.datetime('d MMM yyyy', 'MMM d, yy', 'en')
                   }],
                   title:'',
                   pageLength: 5,
                   lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
+                  //datetime:'DD/MM/YYYY',
                  /* buttons:['copy', 'csv', 'excel', 'pdf', 'print'],*/
                  "language": {
       "search": "Rechercher:",
@@ -190,7 +297,9 @@ export default {
       }
                 });
                 
-              });
+              }
+            
+            );
               break;
             default:
               this.error = "Database error! Status: " + result.status + " Error: " + result.data;
@@ -201,6 +310,9 @@ export default {
       catch (err) {
         this.error = err;
       }
+    },
+    openRechercheAvances() {
+      this.$router.push({ name: "userRecherche" });
     },
     openAddDC() {
       this.$router.push({ name: "AddDC" });

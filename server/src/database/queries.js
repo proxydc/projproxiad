@@ -10,7 +10,7 @@ const getAuthentification = "select * from account a where a.login_name = $1 and
 //queries reg DCS
 const getDCs = "select d.*, ds.label as status_name, acc.display_name as manager_name from dc d, dc_status ds, account acc where d.dc_status = ds.id and d.manager_id = acc.id";
 const getDCsByManagerID = "select d.*, ds.label as status_name, acc.display_name as manager_name from dc d, dc_status ds, account acc where d.dc_status = ds.id and d.manager_id = acc.id and d.ref_managers LIKE $1";
-const getDCById = "select d.*, ds.label as status_name from dc d, dc_status ds where d.id = $1 and d.dc_status = ds.id";
+const getDCById = "select d.*, acc.display_name as manager_name, ds.label as status_name from dc d, dc_status ds, account acc where d.id = $1 and d.dc_status = ds.id and d.manager_id = acc.id ";
 const getDCByIdCandidat = "select d.*, ds.label as status_name from dc d, dc_status ds where d.id = $1 and d.dc_status = ds.id";
 const getDCDocById = "select dc.document, dc.familyname, dc.firstname, dc.nbexps, dc.poste from dc where id = $1 limit 1";
 const checkDCExists = "select a from dc a where a.email = $1";
@@ -18,6 +18,9 @@ const addDC = "insert into dc(familyname, firstname, email, dc_status, document,
 const updateDCByAdmin = "update dc set familyname=$2, firstname=$3, email=$4, dc_status=$5, tags = $6, nbexps = $7, poste = $8, modification_date = $9, ref_managers = $10 where id = $1"; //controle sur email
 const updateDCDoc = "update dc set document = $2, dc_status=$3 where id = $1";
 const deleteDCById = "delete from dc where id = $1";
+const getDCsParDate = "select d.*, ds.label as status_name, acc.display_name as manager_name from dc d, dc_status ds, account acc where d.dc_status = ds.id and d.manager_id = acc.id and d.creation_date >= $1 and  d.creation_date <= $2";
+const getDCsByManagerIDParDate = "select d.*, ds.label as status_name, acc.display_name as manager_name from dc d, dc_status ds, account acc where d.dc_status = ds.id and d.manager_id = acc.id and d.ref_managers LIKE $1 and d.creation_date >= $2 and  d.creation_date <= $3";
+
 
 //queries reg DC-Status
 const getAllDcStatus = "select * from dc_status";
@@ -41,7 +44,9 @@ module.exports = {
     deleteDCById,
     updateDCByAdmin,
     updateDCDoc,
-    getAllDcStatus
+    getAllDcStatus,
+    getDCsParDate,
+    getDCsByManagerIDParDate
 
 
 

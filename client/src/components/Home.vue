@@ -10,6 +10,21 @@
         </option>
       </select>
     </div>
+    <div>
+    <a href="#demo" data-toggle="collapse">Recherches Avances</a>
+    <div id="demo" class="collapse hide">
+      <div class="row">
+              <div class="col col-2">
+                <label for="">De</label>
+                <input type="date" :value="stcreationdate" id="" class="form-control" aria-label="Date de début" />
+              </div>
+              <div class="col col-2">
+                <label for="">A</label>
+                <input type="date" :value="encreationdate" id="" class="form-control" aria-label="Date de fin" />
+              </div>
+              </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -29,7 +44,9 @@ export default {
   data() {
     return {   
       DcManagerList: [],
-      selectedManager: [],    
+      selectedManager: [],  
+      stcreationdate:{type: Date},
+      encreationdate:{type: Date},  
     };
   },
 
@@ -40,6 +57,8 @@ export default {
       localStorage.setItem('heure', '');
       localStorage.setItem('minute', '');
       this.getLogins();
+      this.stcreationdate = '2000-01-01';
+      this.encreationdate = new Date().toJSON().slice(0,10);
     /* $(function () {
     $('select').selectpicker();
     $('#slManager').val([this.DcManagerList[0].display_name, this.DcManagerList[1].display_name, 'Nono']);
@@ -58,17 +77,17 @@ $('#slManager').change(function () {
           switch (res.status) {
             case 200:
               this.DcManagerList = res.data; 
-              alert("her: "+this.DcManagerList[0].display_name);
+              //alert("her: "+this.DcManagerList[0].display_name);
               let v1='Alex';
               let v2='Nono';
               let tesd = "Alex,Nono";
-              alert ("tt: "+ tesd);
+              //alert ("tt: "+ tesd);
              $(function () {
    // $('select').selectpicker();
    var options = []; //options.push(v1); options.push(v2); 
    var selectedOptions = tesd.split(",");
    for(var i in selectedOptions) {
-    alert("val: "+ selectedOptions[i]);
+    //alert("val: "+ selectedOptions[i]);
     options.push(selectedOptions[i]);   
 }
    

@@ -24,6 +24,13 @@ class urllist {
             return baseURL + "dcByManager/" + localStorage.getItem("manager_ref");
         }
     }
+    static getDcsUrlParDate() {
+        acc = localStorage.getItem("useraccount");
+        if (acc == "admin") { return baseURL + "dcParDate"; } else {
+            //alert("user:" + localStorage.getItem("manager_ref"));
+            return baseURL + "dcByManagerParDate/" + localStorage.getItem("manager_ref");
+        }
+    }
     static getDcUrl(id) {
         acc = localStorage.getItem("useraccount");
         if (acc == "user" || acc == "admin")
