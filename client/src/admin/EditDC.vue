@@ -171,10 +171,18 @@ export default {
               if (tesd == null) tesd = mn;
               $(function () {
                 var options = [];
-
+                //if (tesd == null)
                 var selectedOptions = tesd.split(",");
+
                 for (var i in selectedOptions) {
-                  options.push(selectedOptions[i]);
+                 // alert("count: "+ selectedOptions.length)
+                  if (selectedOptions.length == 1) {
+                    options.push(selectedOptions[i]);
+                  } else {
+                    if (mn != selectedOptions[i]) {
+                      options.push(selectedOptions[i]);
+                    }
+                  }
                 }
                 $("#slManager").selectpicker("val", options);
               });
@@ -196,7 +204,7 @@ export default {
       var selectedvalues = "";
       for (var option of document.getElementById("slManager").options) {
         if (option.selected) {
-          alert("opt: "+ option.value + "mn: "+ mn)
+          // alert("opt: "+ option.value + "mn: "+ mn)
           if (option.value != mn) {
             selectedvalues += option.value + ",";
           }
@@ -235,7 +243,7 @@ export default {
         this.model.candidat.ref_managers = this.getSelectedManager(
           this.model.candidat.manager_name
         );
-        alert("M"+this.model.candidat.ref_managers);
+        alert("M" + this.model.candidat.ref_managers);
         let result = await axios.put(url, {
           familyname: this.model.candidat.familyname,
           firstname: this.model.candidat.firstname,

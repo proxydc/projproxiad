@@ -74,11 +74,12 @@
           <tr class="filters">
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
-            <th scope="col">RH</th>
-            <th scope="col">Status</th>
-            <th scope="col">Tags</th>
-            <th scope="col">Date de création</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Créator</th>
+                <th scope="col">Status</th>
+                <th scope="col">Tags</th>
+                <th scope="col">RH</th>
+                <th scope="col">Date de création</th>
+                <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -88,45 +89,26 @@
             <td class="text-start">{{ acRow.manager_name }}</td>
             <td class="text-start">{{ acRow.status_name }}</td>
             <td class="text-start">{{ acRow.tags }}</td>
+            <td class="text-start">{{ acRow.ref_managers }}</td>
           <!--  <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString() }}</td>
                      <td class="text-start">{{ acRow.creation_date }}</td>
             <td class="text-start">{{ new Date(new Date(acRow.creation_date).setDate(new Date(acRow.creation_date).getDate())).toLocaleDateString()}}</td>
             <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString()}}</td>-->
             <td class="text-start">{{ acRow.creation_date }}</td>
             <td>
-              <a
-                class="bi bi-pencil-square btn btn-outline-success btn-sm"
-                :href="'/#/editDC/' + acRow.id"
-                v-b-tooltip.hover
-                title="Editer le candidat!"
-              />
-              <b-button
-                type="button"
-                class="bi bi-trash3 btn btn-outline-danger btn-sm mx-1"
-                @click="deleteDC(acRow.id)"
-                v-b-tooltip.hover
-                title="Supprimer le candidat!"
-              />
-              <a
-                class="bi bi-eye-fill btn btn-outline-success btn-sm mx-1"
-                :href="'/#/formCandidatSaisie/' + acRow.id"
-                target="_blank"
-                v-b-tooltip.hover
-                title="Voir le candidat!"
-              />
-              <button
-                class="bi bi-copy btn btn-outline-success btn-sm mx-1"
-                @click="CopyUrl(acRow.id)"
-                v-b-tooltip.hover
-                title="Copie l'URL"
-              />
-              <a
-                class="bi bi-download btn btn-outline-primary btn-sm mx-1"
-                :href="'/#/dcDownload/' + acRow.id"
-                target="_blank"
-                v-b-tooltip.hover
-                title="Télécharger le document!"
-              />
+              <a class="bi bi-pencil-square btn btn-outline-success btn-sm" :href="'/#/editDC/' + acRow.id"
+                    v-b-tooltip.hover title="Editer le candidat!" />
+
+                  <b-button v-if="getUser() == 'admin'" type="button" class="bi bi-trash3 btn btn-outline-danger btn-sm mx-1"
+                    @click="deleteDC(acRow.id)" v-b-tooltip.hover title="Supprimer le candidat!" />
+
+                  <a class="bi bi-eye-fill btn btn-outline-success btn-sm mx-1"
+                    :href="'/#/formCandidatSaisie/' + acRow.id" target="_blank" v-b-tooltip.hover
+                    title="Voir le candidat!" />
+                  <button class="bi bi-copy btn btn-outline-success btn-sm mx-1" @click="CopyUrl(acRow.id)"
+                    v-b-tooltip.hover title="Copie l'URL" />
+                  <a class="bi bi-download btn btn-outline-primary btn-sm mx-1" :href="'/#/dcDownload/' + acRow.id"
+                    target="_blank" v-b-tooltip.hover title="Télécharger le document!" />
             </td>
           </tr>
         </tbody>
@@ -166,6 +148,9 @@ export default {
     }
   },
   methods: {
+    getUser(){
+            return localStorage.getItem('useraccount')
+        },
     Clear() {
       window.location.reload();
     },
