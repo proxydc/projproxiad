@@ -210,7 +210,17 @@ export default {
           }
         }
       }
-      selectedvalues += mn;
+      if(selectedvalues == "")
+          selectedvalues += mn;
+      else
+      {
+        if(selectedvalues.endsWith(","))
+      {
+        selectedvalues = selectedvalues.slice(0, -1);
+       // alert("iam here: " + selectedvalues);
+        
+      }
+      }
       return selectedvalues;
     },
     getCandidatData(dcId) {

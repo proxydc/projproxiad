@@ -90,11 +90,11 @@
             <td class="text-start">{{ acRow.status_name }}</td>
             <td class="text-start">{{ acRow.tags }}</td>
             <td class="text-start">{{ acRow.ref_managers }}</td>
-          <!--  <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString() }}</td>
-                     <td class="text-start">{{ acRow.creation_date }}</td>
+            <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString() }}</td>
+                <!--       <td class="text-start">{{ acRow.creation_date }}</td>
             <td class="text-start">{{ new Date(new Date(acRow.creation_date).setDate(new Date(acRow.creation_date).getDate())).toLocaleDateString()}}</td>
-            <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString()}}</td>-->
-            <td class="text-start">{{ acRow.creation_date }}</td>
+            <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString()}}</td>
+          <td class="text-start">{{ acRow.creation_date }}</td>-->
             <td>
               <a class="bi bi-pencil-square btn btn-outline-success btn-sm" :href="'/#/editDC/' + acRow.id"
                     v-b-tooltip.hover title="Editer le candidat!" />
@@ -141,7 +141,7 @@ export default {
     try {
       this.getDCs();
       console.log("data: " + this.AcRows);
-      this.stcreationdate = "2000-01-01";
+      this.stcreationdate = "2024-01-01";
       this.encreationdate = new Date().toJSON().slice(0, 10);
     } catch (err) {
       this.error = err.message;
@@ -157,6 +157,7 @@ export default {
     async getDcsParDate() {
       try {
         const url = urldc.getDcsUrlParDate();
+        //alert("cr: "+ this.stcreationdate+" fin: "+ this.encreationdate)
         let result = await axios.post(url, {
           stcreationdate: this.stcreationdate,
           encreationdate: this.encreationdate,
@@ -164,9 +165,16 @@ export default {
         console.log(result.data);
         switch (result.status) {
           case 200:
+            //this.AcRows.destroy();
             this.AcRows = result.data;
             this.error = "";
             this.btnOK = false;
+           // if($("#usertable").DataTable.isDataTable())
+           // { 
+            // alert("iam here");
+            $("#usertable").DataTable().destroy();
+          //}
+            this.createDataTable();
             break;
           default:
             this.error =
@@ -180,15 +188,9 @@ export default {
         this.error = err;
       }
     },
-    getDCs() {
-      try {
-        const url = urldc.getDcsUrl();
-        axios.get(url).then((res) => {
-          console.log(res.data);
-          switch (res.status) {
-            case 200:
-              this.AcRows = res.data;
-              $(document).ready(function () {
+    createDataTable()
+    {
+      $(document).ready(function () {
                 $("#usertable").DataTable({
                   order: [],
                   columnDefs: [
@@ -207,7 +209,7 @@ export default {
                     search: "Rechercher:",
                     lengthMenu: "Lignes par page _MENU_",
                     zeroRecords: "Aucun candidats",
-                    info: "Page _PAGE_ sur _PAGES_",
+                    info: "Page _PAGE_ sur _PAGES_ de _TOTAL_ candidats",
                     infoEmpty: "Aucun candidats disponibles.",
                     infoFiltered: "",
                     paginate: {
@@ -238,6 +240,68 @@ export default {
                   },
                 });
               });
+    },
+    getDCs() {
+      try {
+        const url = urldc.getDcsUrl();
+        axios.get(url).then((res) => {
+          console.log(res.data);
+          switch (res.status) {
+            case 200:
+              this.AcRows = res.data;
+              /*if($("#usertable").DataTable.isDataTable())
+                {$("#usertable").DataTable().destroy();}*/
+                this.createDataTable();
+             /* $(document).ready(function () {
+                $("#usertable").DataTable({
+                  order: [],
+                  columnDefs: [
+                    {
+                      targets: 5,
+                      orderable: false,
+                    },
+                  ],
+                  title: "",
+                  pageLength: 5,
+                  lengthMenu: [
+                    [5, 10, 20, 25, 50, 100, -1],
+                    [5, 10, 20, 25, 50, 100, "Tout"],
+                  ],
+                  language: {
+                    search: "Rechercher:",
+                    lengthMenu: "Lignes par page _MENU_",
+                    zeroRecords: "Aucun candidats",
+                    info: "Page _PAGE_ sur _PAGES_ de _TOTAL_ candidats",
+                    infoEmpty: "Aucun candidats disponibles.",
+                    infoFiltered: "",
+                    paginate: {
+                      next: "Suivant",
+                      previous: "Précedent",
+                      title: "Candidats",
+                    },
+                  },
+                  layout: {
+                    top: {
+                      buttons: [
+                        {
+                          extend: "excel",
+                          title: "Liste des Candidats",
+                        },
+                        "spacer",
+                        {
+                          extend: "pdf",
+                          title: "Liste des Candidats",
+                        },
+                        "spacer",
+                        {
+                          extend: "print",
+                          title: "Liste des Candidats",
+                        },
+                      ],
+                    },
+                  },
+                });
+              });*/
               break;
             default:
               this.error =
@@ -316,7 +380,7 @@ export default {
         this.error = err;
       }
     },
-  },
+  }, 
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -93,11 +93,11 @@
                 <td class="text-start">{{ acRow.tags }}</td>
                 <td class="text-start">{{ acRow.ref_managers }}</td>
                 
-                  <!--  <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString() }}</td>
-                     <td class="text-start">{{ acRow.creation_date }}</td>
+                  <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString() }}</td>
+                  <!--     <td class="text-start">{{ acRow.creation_date }}</td>
             <td class="text-start">{{ new Date(new Date(acRow.creation_date).setDate(new Date(acRow.creation_date).getDate())).toLocaleDateString()}}</td>
-            <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString()}}</td>-->
-            <td class="text-start">{{ acRow.creation_date }}</td>
+            <td class="text-start">{{ new Date(acRow.creation_date).toLocaleDateString()}}</td>
+            <td class="text-start">{{ acRow.creation_date }}</td>-->
                 <td>
                   <!--  <a class="btn btn-success mx-2" :href="'/#/editDC/' + acRow.id" v-b-tooltip.hover title="Modifier le candidat!">
                 Modifier
@@ -171,7 +171,7 @@ export default {
     try {
       this.getDCs();
       console.log("data: " + this.AcRows);
-      this.stcreationdate = '2000-01-01';
+      this.stcreationdate = '2024-01-01';
       this.encreationdate = new Date().toJSON().slice(0,10);
       //localStorage.setItem("RD", "");
     } catch (err) {
@@ -264,7 +264,7 @@ export default {
       "search": "Rechercher:",
       "lengthMenu": "Lignes par page _MENU_",
       "zeroRecords": "Aucun candidats",
-      "info": "Page _PAGE_ sur _PAGES_",
+      "info": "Page _PAGE_ sur _PAGES_ de _TOTAL_ candidats",
       "infoEmpty": "Aucun candidats disponibles.",
       "infoFiltered": "",//"(filteré de la _MAX_ totale candidats)",
       "paginate": {
@@ -275,7 +275,7 @@ export default {
       layout: 
       {
         top: {
-         // buttons:['excel','spacer', 'pdf','spacer', 'print'],
+         // buttons:['excel','spacer', 'pdf','spacer', 'print'], 
             buttons: 
             [
               {
