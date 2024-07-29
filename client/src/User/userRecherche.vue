@@ -51,7 +51,7 @@
               v-if="btnOK == true"
               type="button"
               class="btn btn-outline-primary"
-              @click="getDcsParDate()"
+              @click="OK()"
             >
               OK
             </button>
@@ -139,10 +139,25 @@ export default {
   },
   mounted() {
     try {
+      
+      if(localStorage.getItem('start')=="")
+      {
+        this.stcreationdate = "2024-01-01";
+      this.encreationdate = new Date().toJSON().slice(0, 10);
       this.getDCs();
       console.log("data: " + this.AcRows);
-      this.stcreationdate = "2024-01-01";
-      this.encreationdate = new Date().toJSON().slice(0, 10);
+    }
+      else
+      {
+        alert("iam here-152")
+        this.stcreationdate = localStorage.getItem('start');
+        this.encreationdate = localStorage.getItem('end');
+        alert("cd: "+ this.stcreationdate+"***"+localStorage.getItem('start'));
+        localStorage.setItem('start', "");
+        localStorage.setItem('end', "");
+       this.getDcsParDate();
+       alert("iam here-159")
+      }
     } catch (err) {
       this.error = err.message;
     }
@@ -151,17 +166,24 @@ export default {
     getUser(){
             return localStorage.getItem('useraccount')
         },
+        OK() {
+          localStorage.setItem('start',this.stcreationdate );
+          localStorage.setItem('end', this.encreationdate);
+          alert("st: "+ localStorage.getItem('start'));
+         this.Clear();
+          //this.$router.push({ name: "userRecherche" });
+    },
     Clear() {
       window.location.reload();
     },
-    async getDcsParDate() {
+     getDcsParDate() {
       try {
         const url = urldc.getDcsUrlParDate();
         //alert("cr: "+ this.stcreationdate+" fin: "+ this.encreationdate)
-        let result = await axios.post(url, {
+        axios.post(url, {
           stcreationdate: this.stcreationdate,
           encreationdate: this.encreationdate,
-        });
+        }).then((result)=>{
         console.log(result.data);
         switch (result.status) {
           case 200:
@@ -172,7 +194,7 @@ export default {
            // if($("#usertable").DataTable.isDataTable())
            // { 
             // alert("iam here");
-            $("#usertable").DataTable().destroy();
+           // $("#usertable").DataTable().destroy();
           //}
             this.createDataTable();
             break;
@@ -184,12 +206,16 @@ export default {
               result.data;
             break;
         }
-      } catch (err) {
+        });
+       // alert("iam here-209");
+        }
+       catch (err) {
         this.error = err;
       }
     },
     createDataTable()
     {
+      alert("iam here-217");
       $(document).ready(function () {
                 $("#usertable").DataTable({
                   order: [],
@@ -240,6 +266,7 @@ export default {
                   },
                 });
               });
+              alert("iam here-268");
     },
     getDCs() {
       try {

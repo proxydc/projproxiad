@@ -64,6 +64,8 @@ export default {
               localStorage.setItem("useraccount", "user");
               localStorage.getItem("useraccount");//to save in cookies
             };
+            localStorage.setItem('start', "");
+            localStorage.setItem('end', "");
             this.$router.push({ name: "user" });
             break;
           case 202:
