@@ -209,7 +209,7 @@ export default {
                     search: "Rechercher:",
                     lengthMenu: "Lignes par page _MENU_",
                     zeroRecords: "Aucun candidats",
-                    info: "Page _PAGE_ sur _PAGES_ de _TOTAL_ candidats",
+                    info: "Page _PAGE_ sur _PAGES_ de <b> <FONT color='blue'> _TOTAL_ </FONT></b>candidats",
                     infoEmpty: "Aucun candidats disponibles.",
                     infoFiltered: "",
                     paginate: {
