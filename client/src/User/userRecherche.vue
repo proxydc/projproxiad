@@ -48,7 +48,7 @@
           <div class="col col-2">
             <br />
             <button
-              v-if="btnOK == true"
+             
               type="button"
               class="btn btn-outline-primary"
               @click="OK()"
@@ -56,7 +56,7 @@
               OK
             </button>
             <button
-              v-else
+             
               type="button"
               class="btn btn-outline-primary"
               @click="Clear()"
