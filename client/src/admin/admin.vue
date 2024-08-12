@@ -130,7 +130,7 @@ export default {
                     "targets": 4,
                     "orderable": false,
                   }],
-                  pageLength: 5,
+                  pageLength: 25,
                   lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
                    "language": {
       "search": "Rechercher:",

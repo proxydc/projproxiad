@@ -40,7 +40,7 @@ CREATE TABLE dc(
     manager_id INTEGER NOT NULL,
     nbexps integer NOT NULL DEFAULT 0,
     poste character varying(128) NULL,
-    creation_date timestamp without time zone NOT NULL,
+    creation_date date NOT NULL,
     modification_date timestamp without time zone NOT NULL,
     ref_managers VARCHAR(256),
 );

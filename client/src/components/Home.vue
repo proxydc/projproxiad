@@ -3,7 +3,7 @@
     <nav>
       <router-link to="/login">Login</router-link>
     </nav>
-    <div class="multi_select_box">
+  <!--  <div class="multi_select_box">
       <select id="slManager" class="multi_select w-100" multiple data-selected-text-format=" count > 2">
         <option v-for="(rhdc,index) in DcManagerList" :value="rhdc.Id" :key="index">
           {{ rhdc.display_name }}
@@ -24,7 +24,7 @@
               </div>
               </div>
     </div>
-  </div>
+  </div>-->
 </template>
 
 <script>

@@ -74,7 +74,7 @@
           <tr class="filters">
             <th scope="col">Nom</th>
             <th scope="col">Prénom</th>
-            <th scope="col">Créator</th>
+            <th scope="col">Créateur</th>
                 <th scope="col">Status</th>
                 <th scope="col">Tags</th>
                 <th scope="col">RH</th>
@@ -122,6 +122,8 @@ import Admin_Layout from "../admin/admin_Layout.vue";
 import axios from "axios";
 import urldc from "../_helpers/urllist.js";
 import $ from "jquery";
+$.fn.dataTable.moment('DD/MM/YYYY'); 
+import 'datatables.net-plugins/sorting/datetime-moment'
 
 export default {
   name: "userRecherche",
@@ -149,14 +151,14 @@ export default {
     }
       else
       {
-        alert("iam here-152")
+       // alert("iam here-152")
         this.stcreationdate = localStorage.getItem('start');
         this.encreationdate = localStorage.getItem('end');
-        alert("cd: "+ this.stcreationdate+"***"+localStorage.getItem('start'));
+        //alert("cd: "+ this.stcreationdate+"***"+localStorage.getItem('start'));
         localStorage.setItem('start', "");
         localStorage.setItem('end', "");
        this.getDcsParDate();
-       alert("iam here-159")
+      // alert("iam here-159")
       }
     } catch (err) {
       this.error = err.message;
@@ -169,7 +171,7 @@ export default {
         OK() {
           localStorage.setItem('start',this.stcreationdate );
           localStorage.setItem('end', this.encreationdate);
-          alert("st: "+ localStorage.getItem('start'));
+         // alert("st: "+ localStorage.getItem('start'));
          this.Clear();
           //this.$router.push({ name: "userRecherche" });
     },
@@ -215,18 +217,18 @@ export default {
     },
     createDataTable()
     {
-      alert("iam here-217");
+      //alert("iam here-217");
       $(document).ready(function () {
                 $("#usertable").DataTable({
                   order: [],
                   columnDefs: [
                     {
-                      targets: 5,
+                      targets: 7,
                       orderable: false,
                     },
                   ],
                   title: "",
-                  pageLength: 5,
+                  pageLength: 25,
                   lengthMenu: [
                     [5, 10, 20, 25, 50, 100, -1],
                     [5, 10, 20, 25, 50, 100, "Tout"],
@@ -266,7 +268,7 @@ export default {
                   },
                 });
               });
-              alert("iam here-268");
+              //alert("iam here-268");
     },
     getDCs() {
       try {

@@ -66,7 +66,7 @@
                 <th><input type="text" class="form-control" placeholder="Tags" disabled></th>-->
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
-                <th scope="col">Créator</th>
+                <th scope="col">Créateur</th>
                 <th scope="col">Status</th>
                 <th scope="col">Tags</th>
                 <th scope="col">RH</th>
@@ -141,8 +141,15 @@
 import Admin_Layout from "../admin/admin_Layout.vue";
 import axios from "axios";
 import urldc from "../_helpers/urllist.js";
+//import "datatables.net-plugins/sorting/date-eu.js";
 import $ from "jquery";
-
+//import moment from 'moment';
+//import DataTable from 'datatables.net';
+//moment().format();
+//window.moment = moment;
+$.fn.dataTable.moment('DD/MM/YYYY'); 
+//$.fn.dataTable.moment('M/D/YYYY HH:mm a');
+import 'datatables.net-plugins/sorting/datetime-moment'
 /*import pdfFonts from '../assets/vfs_fonts.js';
 import JSZip from 'jszip';
 import pdfMake from 'pdfmake';
@@ -249,14 +256,33 @@ export default {
               {  
                 $('#usertable').DataTable({
                   "order": [],
-                  "columnDefs": [{
-                    "targets": 5,
+                  "columnDefs": [
+                 // {"targets":6,
+                    //"type": 'datetime-moment',
+                   /* "render": function(data, type, row){
+                     //|| type == 'filter'
+                      if(type=='sort'){
+                        //alert("type: "+ type+ data);                   
+
+                         var dt = moment(data, 'DD/MM/YYYY A').format('DD/MM/YYYY');
+                //console.log(dt);
+               // alert("dt: "+ dt);
+                return dt;
+                      
+                    }
+                    return data;
+                  }*/
+               // },
+                  {
+                    "targets": 7,
                     "orderable": false,
                     //"render":"datetime('d MMM yyyy', 'MMM d, yy', 'en')",//'DD/MM/YYYY',
                     //"render":  $('#usertable').render.datetime('d MMM yyyy', 'MMM d, yy', 'en')
-                  }],
+                  }]
+                  ,
+                 // "columnDefs" : [],
                   title:'',
-                  pageLength: 5,
+                  pageLength: 25,
                   lengthMenu: [[5, 10, 20, 25, 50, 100, -1], [5, 10, 20, 25, 50, 100, 'Tout']],
                   //datetime:'DD/MM/YYYY',
                  /* buttons:['copy', 'csv', 'excel', 'pdf', 'print'],*/
